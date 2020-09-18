@@ -599,7 +599,6 @@ public class Exercises {
 		if(a==13 && b==13)
 			return 0;
 		if(a==13)
-		if(a==13)
 			return c;
 		if(b==13)
 			return a;

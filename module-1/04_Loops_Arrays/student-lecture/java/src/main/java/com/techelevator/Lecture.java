@@ -7,7 +7,7 @@ public class Lecture {
     */
     public int[] returnArray() {
         int[] array = { 80, 8080, 443 };
-        return null;
+        return array;
     }
 
     /*
@@ -15,7 +15,7 @@ public class Lecture {
     */
     public int returnFirstElement() {
         int[] portNumbers = { 80, 8080, 443 };
-        return 1;
+        return portNumbers[0];
     }
 
     /*
@@ -23,21 +23,21 @@ public class Lecture {
     */
     public int returnLastElement() {
         int[] portNumbers = { 80, 8080, 443 };
-        return 1;
+        return portNumbers[portNumbers.length - 1];
     }
 
     /*
     4. Return the first element of the array from the parameters
     */
     public int returnFirstElementOfParam(int[] passedInArray) {
-        return 1;
+        return passedInArray[0];
     }
 
     /*
     5. Return the last element of the array from the parameters
     */
     public int returnLastElementOfParam(int[] passedInArray) {
-        return 1;
+        return passedInArray[passedInArray.length - 1];
     }
 
     /*
@@ -104,7 +104,7 @@ public class Lecture {
             counter++;
         }
 
-        return counter == 1; // What should the number be to return true?
+        return counter == 4; // What should the number be to return true?
     }
 
     /*
@@ -116,7 +116,7 @@ public class Lecture {
         int counter = 0;
 
         //     Start;       Keep going while         Increment by one;
-        for (int i = 1; i < arrayToLoopThrough.length; i++) {
+        for (int i = 0; i < arrayToLoopThrough.length; i++) {
             counter += 1;
         }
 
@@ -132,7 +132,7 @@ public class Lecture {
         int counter = 0;
 
         //     Start;       Keep going while         Increment by one;
-        for (int i = 0; i <= arrayToLoopThrough.length; i++) {
+        for (int i = 0; i <= arrayToLoopThrough.length - 1; i++) {
             counter = counter + 1;
         }
 
@@ -149,7 +149,7 @@ public class Lecture {
         int sum = 0;
 
         //     Start;       Keep going while       Increment by;
-        for (int i = 0; i < arrayToLoopThrough.length; i = i + 1) {
+        for (int i = 0; i < arrayToLoopThrough.length; i = i + 2) {
             sum = sum + arrayToLoopThrough[i];
         }
 
