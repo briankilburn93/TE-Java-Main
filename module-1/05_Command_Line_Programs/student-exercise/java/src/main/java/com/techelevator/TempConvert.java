@@ -5,6 +5,12 @@ import java.util.Scanner;
 public class TempConvert {
 
 	public static void main(String[] args) {
+		
+		String hello1 = "test";
+		String hello3 = hello1;
+		hello1 = "hi";
+		System.out.println(hello1 + " " + hello3);
+		
 
 		double convertedTemp = 0;
 		String inFOrC = "";
