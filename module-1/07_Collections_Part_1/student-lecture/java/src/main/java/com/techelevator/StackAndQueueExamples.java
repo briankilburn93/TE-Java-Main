@@ -12,6 +12,9 @@ public class StackAndQueueExamples {
 /********************************************************************************
  *  Stack - LIFO Collection
  *  
+ *  Unlike an ArrayList, only one element at a time is available in the stack
+ *  					and one you pop() it off, it is removed
+ *  
  *  Normal access to elements in a Stack is through the push() and pop() methods
  *  
  *  Accessing a Stack using an index may be confusing. 
@@ -36,8 +39,8 @@ public class StackAndQueueExamples {
  **********************************************************************************/
 
 		Stack <String> myStack = new Stack<String>();
-		
-		myStack.push("Kirk");
+		// Add objects to the Stack
+		myStack.push("Kirk");     // bottom element in Stack
 		myStack.push("Spock");
 		myStack.push("McCoy");
 		myStack.push("Uhura");
@@ -46,12 +49,13 @@ public class StackAndQueueExamples {
 		myStack.push("Worf");
 		myStack.push("Riker");
 		myStack.push("Geordi");
-		myStack.push("Data");
+		myStack.push("Data");     // top element of Stack
 		
 		System.out.println("Displaying elements in myStack: ");
 		
 		itemNum = 0;
-		for (String item : myStack) {
+		//  curr-element
+		for (String item : myStack) {   // Processing Stack one element at a time using the for-each loop
 			System.out.println("Item @ index #"+itemNum++ + " " + item);
 			}
 			

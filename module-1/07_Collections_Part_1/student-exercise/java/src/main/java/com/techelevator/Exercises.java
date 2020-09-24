@@ -16,7 +16,13 @@ public class Exercises {
 	 array2List( {"Left", "Right", "Forward", "Back"} )  ->  ["Left", "Right", "Forward", "Back"]
 	 */
 	public List<String> array2List(String[] stringArray) {
-		return null;
+		ArrayList<String> newList = new ArrayList<>();
+		// Loop through the array that is passed and elements to the new Array List
+		for(int i=0; i < stringArray.length; i++)
+		{
+			newList.add(stringArray[i]);
+		}
+		return newList;
 	}
 
 	/*
@@ -26,7 +32,13 @@ public class Exercises {
 	 list2Array( ["Left", "Right", "Forward", "Back"] )  ->  {"Left", "Right", "Forward", "Back"}
 	 */
 	public String[] list2Array(List<String> stringList) {
-		return null;
+		String[] newArray = new String[stringList.size()]; // Create an array to return, that is the size of ArrayList
+		
+		for(int i=0; i<stringList.size(); i++)
+		{
+			newArray[i] = stringList.get(i);
+		}
+		return newArray;
 	}
 
 	/*
@@ -37,7 +49,16 @@ public class Exercises {
 	 no4LetterWords( {"Jack", "Jill", "Jane", "John", "Jim"} )  ->  ["Jim"]
 	 */
 	public List<String> no4LetterWords(String[] stringArray) {
-		return null;
+		ArrayList<String> newList = new ArrayList<>();
+
+		for(int i=0; i < stringArray.length; i++)
+		{
+			if(stringArray[i].length() != 4)
+			{
+				newList.add(stringArray[i]);
+			}
+		}
+		return newList;
 	}
 
 	/*
@@ -47,7 +68,14 @@ public class Exercises {
 	 arrayInt2ListDouble( {84, 99, 3285, 13, 877} ) -> [42, 49.5, 1642.5, 6.5, 438.5]
 	 */
 	public List<Double> arrayInt2ListDouble(int[] intArray) {
-		return null;
+		List<Double> intToDouble = new ArrayList<>();
+
+		for(int i: intArray)
+		{
+			double addDouble = (double)i/ 2;	
+			intToDouble.add(addDouble);
+		}
+		return intToDouble;
 	}
 
 	/*
@@ -57,7 +85,17 @@ public class Exercises {
 	 findLargest( [34070, 1380, 81238, 7782, 234, 64362, 627] ) -> 64362
 	 */
 	public Integer findLargest(List<Integer> integerList) {
-		return null;
+		List<Integer> theLargest = new ArrayList<>();
+		int finalNumber = integerList.get(0);
+		
+		for(int i=0; i < integerList.size(); i++)
+		{
+			if(integerList.get(i) >= finalNumber)
+			{
+				finalNumber = integerList.get(i);
+			}
+		}
+		return finalNumber;
 	}
 
 	/*
@@ -67,7 +105,16 @@ public class Exercises {
 	 oddOnly( {734, 233, 782, 811, 3, 9999} ) -> [233, 811, 3, 9999]
 	 */
 	public List<Integer> oddOnly(Integer[] integerArray) {
-		return null;
+		List<Integer> oddOnlyIntList = new ArrayList<>();
+		
+		for(int i=0; i < integerArray.length; i++)
+		{
+			if(integerArray[i] % 2 == 1)
+			{
+				oddOnlyIntList.add(integerArray[i]);
+			}
+		}
+		return oddOnlyIntList;
 	}
 
 	/*
@@ -78,7 +125,25 @@ public class Exercises {
 	 foundIntTwice( [9, 23, 44, 2, 88, 44], 44) -> true
 	 */
 	public boolean foundIntTwice(List<Integer> integerList, int intToFind) {
-		return false;
+		
+		boolean onlyOnce = false;
+		boolean twoOrMore = false;
+		
+		for(int i: integerList)
+		{
+			if(i == intToFind)
+			{
+				if(!onlyOnce)
+				{
+					onlyOnce = true;
+				}
+				else
+				{
+					twoOrMore = true;
+				}
+			}
+		}
+		return twoOrMore;
 	}
 
 	/*
@@ -95,7 +160,29 @@ public class Exercises {
 	 equals "1")
 	 */
 	public List<String> fizzBuzzList(Integer[] integerArray) {
-		return null;
+		ArrayList<String> fizzBuzzWordAdd = new ArrayList<String>();
+		
+		for(Integer i: integerArray)
+		{
+			if(i % 3 == 0 && i % 5 == 0)
+			{
+				fizzBuzzWordAdd.add("FizzBuzz");
+			}
+			else if(i % 3 == 0)
+			{
+				fizzBuzzWordAdd.add("Fizz");
+			}
+			else if(i % 5 == 0)
+			{
+				fizzBuzzWordAdd.add("Buzz");
+			}
+			else
+			{
+				String numString = i.toString();
+				fizzBuzzWordAdd.add(numString);
+			}
+		}
+		return fizzBuzzWordAdd;
 	}
 
 	/*
@@ -106,7 +193,58 @@ public class Exercises {
 	 interleaveLists( [1, 2, 3], [4, 5, 6] )  ->  [1, 4, 2, 5, 3, 6]
 	 */
 	public List<Integer> interleaveLists(List<Integer> listOne, List<Integer> listTwo) {
-		return null;
-	}
+		List<Integer> combinedList = new ArrayList<Integer>();  // create the return list
+
+		// Happy path - both Lists are the same size
+		// Edge case - Lengths are different
+//		     copy all the element for the length of the shorter one
+//		              (figure out which one is shorter)
+//		     copy the remaining elements from the longer one into combined list
+
+		// Determine the length of the short list
+
+		int lengthShorter = 0;   // Contains the length of the shorter list
+
+		boolean listOneIsShorter = false;
+		boolean listTwoIsShorter = false;
+
+		if (listOne.size() < listTwo.size()) {  // listOne is shorter
+		lengthShorter = listOne.size();
+		listOneIsShorter = true;
+		}
+		else {   // listTwo is either shorter or the same size as listOne
+		lengthShorter = listTwo.size();
+		listTwoIsShorter = true;
+		}
+
+		int lastElementCopied = 0;    // Will contain the index of the last element copied to combinedList
+
+		// Go through listOne and listTwo one element at a time
+//		      adding the current element to the combined list
+//		      in order of listOne element first and the listTwo second
+
+		for(int i = 0; i < lengthShorter; i++) {  // Loop for the size of the shorted list
+		combinedList.add(listOne.get(i));      //    Add the current element from listOne to combinedList
+		combinedList.add(listTwo.get(i));      //    Add the current element from listTwo to combinedList
+		lastElementCopied = i;                 // Remember the index of the last element copied
+		}
+
+		// Now we have copied all elements for the length of shorter list
+		// we need to copy the elements from the longer one into combinedList
+
+		if (listOneIsShorter) { // if listOne was shorter copy the remaining elements from listTwo
+		                   //                    from where we left off in listTwo
+		for (int i = lastElementCopied + 1; i < listTwo.size(); i++) {
+		combinedList.add(listTwo.get(i)); // Add an element from listOne to combinedList
+		}
+		}
+		else {  // listTwo was shorter copy the remaining elements from listOne
+		   //                    from where we left off in listOne
+		for (int i = lastElementCopied + 1; i < listOne.size(); i++) {
+		combinedList.add(listOne.get(i)); // Add an element from listTwo to combinedList
+		}
+		}
+		return combinedList;   // return the combined list
+		}
 
 }
