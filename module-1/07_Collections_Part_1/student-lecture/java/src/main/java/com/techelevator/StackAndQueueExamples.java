@@ -101,13 +101,13 @@ public class StackAndQueueExamples {
  *                      you must cast reference to type necessary
  * 
  **********************************************************************************/
-	
+		// LinkedList class is how Queues are implemented in Java
 		LinkedList <String> myQueue = new LinkedList<String>();	    
 		//myQueue.
 		
-		myQueue.add("Josh");
+		myQueue.add("Josh");  // Add element to end of Queue
 		myQueue.add("Joe");
-		myQueue.push("Craig");
+		myQueue.push("Craig");  // Add element to top of Queue
 		myQueue.add("Dan");
 		myQueue.add("Mike");
 		myQueue.add("Frank");			
