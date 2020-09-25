@@ -1,6 +1,44 @@
 package com.techelevator;
 
+	/** identifies a special type comment know as a JavaDoc (Javadoc) comment
+ 	* 
+	* A JavaDoc can be used to generate standard formatted documentation
+ 	* and it shows when in intellisense of the IDE
+ 	* 
+ 	* May different annotations (@-word) to identify specific components of code
+	* 
+	* @param
+ 	* @returns
+ 	* @author student
+ 	*
+ 	* Refer to the Topic in Cohort Google Doc for a link to more than you want to about JavaDoc
+ 	*
+	 */
+
+
 public class PlayingCard {
+	/*********************************************************************************************
+	 * static - means there is only copy - shared by all objects
+	 * 
+	 * No matter how many objects of the class exist there is only one copy of the static data
+	 * 
+	 * static data exists even if no object of the class have been instantiated
+	 * 
+	 * non-static variables are referred to as instance variables because they exist for each
+	 *            instance of the class
+	 *            
+	 * static data members can only be changed by static methods.
+	 * 
+	 * static methods can only refer to static data members
+	 * 
+	 * static method is one that processes static data
+	 * 
+	 * static methods may be invoked with any object of the class or class name
+	 * 
+	 *      System.out.println()   -   System is the class name; out is the object; println() is the method
+	 * 
+	 *      Integer.parseInt()     -   Integer is the class name; parseInt() is the method
+	 ********************************************************************************************/
 	//********************************************************************************************
 	// Class member constants 
 	//********************************************************************************************
