@@ -39,6 +39,8 @@ public class IntroToClassesCard {
 		
 		myCard.showCard();                       // Use the PlayingCard object to run the ShowCard() method                                                // using the 2-arg ctor
 
+		System.out.println("Display myCard using the PlayingCard toString(): " + myCard);
+		
         System.out.println("-----------------------------------------------------------------------------------");
 		
         System.out.println("Executing: PlayingCard myCard = new PlayingCard(14,Diamonds);\n");
@@ -73,6 +75,20 @@ public class IntroToClassesCard {
 		System.out.println("After flip(), Is the card face up? " + theCard.isShowing());
 		
 		System.out.println("-----------------------------------------------------------------------------------");
+
+		// I want to know if two cards are equal
+		//		Two cards are equal when
+		//			1. All attributes are the same
+		//			-or-
+		//			2. All attributes are the same, except whether they faceUp/Down
+		//			-or-
+		//			3. The values are the same
+		
+		PlayingCard codyCard = new PlayingCard();
+		PlayingCard sethCard = new PlayingCard();
+		
+		System.out.println("The cards are equal: " + codyCard.equals(sethCard));
+	
 	}
 }
 		 

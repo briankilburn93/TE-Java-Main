@@ -40,21 +40,22 @@ public class PlayingCard {
 	 *      Integer.parseInt()     -   Integer is the class name; parseInt() is the method
 	 ********************************************************************************************/
 	//********************************************************************************************
-	// Class member constants 
+	// Class member constants  - final indicates a constant - value cannot be changed
+					//static - indicates there is one instance of variable shared by all objects
 	//********************************************************************************************
-	private final int MINVALUE    = 0;             // Minimum valid card value 
-	private final int MAXVALUE    = 13;            // Maximum valid card value
-	private final int JOKER_VALUE = 0;             // Joker value - No considered valid
-	private final int DEFAULT_VALUE = JOKER_VALUE; // Used if no value provided
+	private static final int MINVALUE    = 0;             // Minimum valid card value 
+	private static final int MAXVALUE    = 13;            // Maximum valid card value
+	private static final int JOKER_VALUE = 0;             // Joker value - No considered valid
+	private static final int DEFAULT_VALUE = JOKER_VALUE; // Used if no value provided
 		
 	//********************************************************************************************	
 	// Class member data - attributes of an class object
 	//********************************************************************************************
-	private String  suit;
-	private int     value;   // 0=Joker, 11=Jack, 12=Queen, 13=King
-	private String  color;
-	private boolean showing;
-	private String  shape;   // read-only - no Setter or argument to a constructor
+	private 	   String  suit;
+	private 	   int     value;   // 0=Joker, 11=Jack, 12=Queen, 13=King
+	private 	   String  color;
+	private 	   boolean showing;
+	private static String  shape;   // read-only - no Setter or argument to a constructor
 	
 //********************************************************************************************
 // Constructors for the class
@@ -232,11 +233,23 @@ public class PlayingCard {
 	 * @return String containing the attributes of the object
 	 */
 	
-	@Override             // Ask the compiler to verify this is a proper override
+	//@Override             // Optional - Ask the compiler to verify this is a proper override
 	public String toString() {
 		return "PlayingCard [suit=" + suit + ", value=" + value + ", color=" + color + ", showing=" + showing
 				            + "shape=" + shape +"]";
 	}
+	
+	public boolean equals(PlayingCard otherWord) {
+		if(this.value == otherCard.value && this.suit.equals(otherCard.suit) && this.shape.equals(otherCard.shape) && this.color.equals(otherCard.color) && this.isShowing() == otherCard.isShowing())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 }
 
 
