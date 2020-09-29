@@ -1,11 +1,15 @@
 package com.techelevator;
 
 public class UsePlayingCards {
-
+/*************************************************
+ * This is the application program - main()
+ * 
+ * Instantiate objects and manipulate objects using methods to their work done
+ *************************************************/
 	public static void main(String[] args) {
 		System.out.println("\nInstantiating aUSACard as an ace of Hearts");
 		AmericanPlayingCard aUSACard  = new AmericanPlayingCard(1, "HEARTS");  // Instantiate an Ace of Hearts
-		System.out.println("aUSACard is : \n" + aUSACard);
+		System.out.println("aUSACard is : \n" + aUSACard); // Java uses the PlayingCard(super toString())
 		
 		System.out.println("\nInstantiating aUSACard2 with a value that exceeds maximum");
 		AmericanPlayingCard aUSACard2 = new AmericanPlayingCard(14, "SPADES"); // Value exceeds maximum
@@ -18,12 +22,16 @@ public class UsePlayingCards {
 
 		System.out.println("\nComparing aUSACard2 and aUSACard3");
 		
-		if (aUSACard2.equals(aUSACard3)) {
+		if (aUSACard2.equals(aUSACard3)) {					// uses the super class .equals()
 			System.out.println("They are equal");
 		}
 		else {
 			System.out.println("They are NOT equal");
 		}
+		
+		ItalianPlayingCard frank = new ItalianPlayingCard(46, "Browns", "Orange");
+		
+		System.out.println("Frank card is: " + frank);
 	}
 
 }
