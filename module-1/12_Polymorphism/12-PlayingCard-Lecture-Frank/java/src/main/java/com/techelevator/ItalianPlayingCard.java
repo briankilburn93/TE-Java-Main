@@ -71,7 +71,7 @@ public class ItalianPlayingCard extends PlayingCard {
 			  +" - super.toString()=" + super.toString() + "\n";
 	}
 
-	public void showCard() {
-		System.out.println(this.toString());
-	}
+	//public void showCard() {
+	//	System.out.println(this.toString());
+	//}
 }

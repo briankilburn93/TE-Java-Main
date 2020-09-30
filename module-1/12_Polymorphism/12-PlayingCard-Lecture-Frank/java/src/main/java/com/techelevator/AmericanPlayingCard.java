@@ -27,6 +27,8 @@ public class AmericanPlayingCard extends PlayingCard{
 		super(value,                                                        // Call super ctor with value passed
 			  suitMap.containsKey(suit) ? suit : DEFAULTSUIT,               // If valid suit passed, use it otherwise use DEFAULTSUIT
 		      suitMap.get(suit) != null ? suitMap.get(suit) : DEFAULTCOLOR);// If valid suit passed, use color for suit otherwise use DEFAULTCOLOR  
+		//			  condition			? valid-if-true		: value-if-false
+		//			.get() return the value associated with the key passed or null if key not found
 		
 		if (value > MAXVALUE) {
 			setValue(MAXVALUE);

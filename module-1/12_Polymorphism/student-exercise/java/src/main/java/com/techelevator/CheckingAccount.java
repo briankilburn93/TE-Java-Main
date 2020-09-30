@@ -9,6 +9,7 @@ public class CheckingAccount extends BankAccount {
     public CheckingAccount(String accountHolder, String accountNumber) {
         super(accountHolder, accountNumber);
     }
+    
 
     @Override
     public int withdraw(int amountToWithdraw) {

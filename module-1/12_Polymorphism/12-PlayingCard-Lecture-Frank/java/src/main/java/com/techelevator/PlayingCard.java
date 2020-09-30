@@ -60,4 +60,8 @@ public class PlayingCard {
 		}
 		return true;
 	}
+	
+	public void showCard() {
+		System.out.println(this.toString());
+	}
 }
