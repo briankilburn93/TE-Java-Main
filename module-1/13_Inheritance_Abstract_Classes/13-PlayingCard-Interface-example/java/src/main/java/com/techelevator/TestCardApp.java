@@ -24,18 +24,18 @@ public class TestCardApp {
 		System.out.println("-- Dealing a BlackJack Hand               --");
 		System.out.println("-----------------------------------------------------");
 
-		myDeck.resetDeck(false);
-		myDeck.shuffleDeck();
+		myDeck.resetDeck(false);	// Generate a new CardDeck
+		myDeck.shuffleDeck();		// Shuffle the CardDesk
 
-		myBlackJackHand.dealHand(myDeck);
+		myBlackJackHand.dealHand(myDeck);	// Deal a BlackJackHand
 		
-		myBlackJackHand.show();
+		myBlackJackHand.show();		// Show the cards in the hand
 		
 		System.out.println("-----------------------------------------------------");
 		System.out.println("-- Adding a Card to a BlackJack Hand               --");
 		System.out.println("-----------------------------------------------------");
 	
-		myBlackJackHand.addCard(myDeck.dealCard());
+		myBlackJackHand.addCard(myDeck.dealCard());		// Add a card to the existing hand
 		
 		for(PlayingCard aCard : myBlackJackHand.getHand()) {
 			System.out.println(aCard);

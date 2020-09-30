@@ -14,7 +14,7 @@ public class PlayingCard {
 	private static Map<String,  String> suitMap  = new HashMap<String , String>();  
 	private static Map<Integer, String> valueMap = new TreeMap<Integer, String>();
 	
-	static {              // Call static method to initialize maps 
+	static {              // Call static anonymous method to initialize maps 
 		                  //   Run when first object is instantiated before the constructor
 		initializeMaps(); // static method to initialize maps
 	}

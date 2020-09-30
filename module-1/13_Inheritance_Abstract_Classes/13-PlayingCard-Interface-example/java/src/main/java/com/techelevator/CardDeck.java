@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
+// Class to model a standard 52-card deck of cards with optional Jokers
 
 public class CardDeck {
+	// The deck a Queue (FIFO data structure)
 	LinkedList<PlayingCard> deckOfCards = new LinkedList<PlayingCard>();
 	private int numCardsInDeck = 54;
 
-	public CardDeck() {
+	public CardDeck() { // Default ctr
 		resetDeck(true); // reset deck with jokers
 	}
 
@@ -31,7 +33,7 @@ public class CardDeck {
 
 	public PlayingCard dealCard() {
 		if (deckOfCards.size() > 0) {
-			return deckOfCards.remove();
+			return deckOfCards.remove();  // .remove for a Queue removes the object from Queue
 		}
 		else {
 			 return null;
@@ -61,8 +63,10 @@ public class CardDeck {
 	}
 
 	public void shuffleDeck() {
-		resetDeck(false);
-		Collections.shuffle(deckOfCards);
+		resetDeck(false);						// reset deck with no jokers
+		Collections.shuffle(deckOfCards);		// use the built-in Collections class shuffle method to shuffle deck
+	 											//LinkedList is a Collections class subclass so we can use
+												//		any Collections method to manipulate
 	}
 
 }

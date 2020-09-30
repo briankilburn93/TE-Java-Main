@@ -6,6 +6,9 @@ import java.util.List;
 public class UsePlayingCards {
 
 	public static void main(String[] args) {
+		
+		//PlayingCard someCard = new PlayingCard(1, "Diamonds", "RED");
+		
 		AmericanPlayingCard aUSACard  = new AmericanPlayingCard(1, "HEARTS");
 		System.out.println("aUSACard is : \n" + aUSACard);
 		
@@ -39,8 +42,8 @@ public class UsePlayingCards {
 		someCards.add(aUSACard);
 		someCards.add(aSwissCard2);
 		
-		for(PlayingCard aCard : someCards) {
-			aCard.showCard();
+		for(PlayingCard aCard : someCards) {	// Use the super class when we process to implement Polymorphism
+			aCard.showCard();	// The subclass showCard will run due to Polymorphism
 		}
 			
 	}

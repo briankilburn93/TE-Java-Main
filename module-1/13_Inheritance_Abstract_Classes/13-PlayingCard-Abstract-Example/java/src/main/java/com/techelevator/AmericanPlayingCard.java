@@ -61,8 +61,8 @@ public class AmericanPlayingCard extends PlayingCard{
 	@Override
 	public String toString() {
 		return "AmericanPlayingCard: " 
-	          +"Value: "  + valueMap.get(getValue())
-	          +" - Color: " + suitMap.get(getSuit()) 
+	          +"Value: "  + valueMap.get(value)
+	          +" - Color: " + suitMap.get(suit)
 			  +" - Suit: "  + getSuit()
 			  +" - super.toString()=" + super.toString() + "\n";
 	}
