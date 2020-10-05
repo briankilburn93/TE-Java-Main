@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LectureTest {
 
-    private Lecture exercises = new Lecture();
+    private Lecture exercises = new Lecture();	//-- Define an object the class containing the methods to test
 
     @Test
     public void testReturnNotOne() {

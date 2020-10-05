@@ -94,6 +94,7 @@ public class CardDeck {
 	public void shuffleDeck() {
 		resetDeck(false);                  // Reload deck without Jokers
 		Collections.shuffle(deckOfCards);  // Use Collections class shuffle() to randomize cards in deck
+		
 	}
 	
 	/***************************************************************************************************

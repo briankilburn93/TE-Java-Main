@@ -14,12 +14,14 @@ public class PlayingCard {
 	 * 
 	 * enum - define a set of constant values that may be referenced as a data type
 	 ***************************************************************************************************/
-	public static enum CardColor {          
-		BLACK, RED                         
+	public static enum CardColor {          //-- words to represent valid colors of a PlayingCard
+		BLACK, RED                         	//-- These are NOT Strings, they are names to represent values
+											//-- The CardColor type only allows the values BLACK and RED
 	};
 
-	public static enum CardSuit {          // public is OK since they are constants and cannot be changed
-		SPADE, CLUB, HEART, DIAMOND, JOKER // static so it can be referenced using the class name. ie. no object required
+	public static enum CardSuit {          	// public is OK since they are constants and cannot be changed
+		SPADE, CLUB, HEART, DIAMOND, JOKER 	// static so it can be referenced using the class name. ie. no object required
+											//-- The CardSuit type only allows the values SPADE, CLUB, HEART, DIAMOND, JOKER
 	};
 
 	public static enum CardValue {
@@ -33,7 +35,7 @@ public class PlayingCard {
 	 * 
 	 * static so it can be referenced using the class name. ie. no object required
 	 ***************************************************************************************************/
-	
+	//--				   enum							enum-name.value
 	protected static final CardValue DEFAULTCARDVALUE = CardValue.JOKER; 
 	protected static final CardColor DEFAULTCOLOR     = CardColor.BLACK;
 	protected static final CardSuit  DEFAULTSUIT      = CardSuit.JOKER;
@@ -95,8 +97,9 @@ public class PlayingCard {
 	 * setter methods
 	 ***************************************************************************************************/
 	public CardValue setValue(int ivalue) {  // Set the CardValue based on an int value
-		switch (ivalue) {
-		case 1:
+		//--					switch(value-te-test)
+		switch (ivalue) {		//-- alternative to a nested if/else with == - shorthand for a nested if/else
+		case 1:					//-- if the value-to-test equals the value specified
 			return CardValue.ONE;
 		case 2:
 			return CardValue.TWO;
@@ -128,11 +131,15 @@ public class PlayingCard {
 	}
 
 	private void setColor(CardSuit suit) {  // Set the color based on the suit of the object
+		//-- switch will test the value it is given to see if equals the value in a case one at a time
+		//--		from top to bottom one at time - executes the code in the case when case is true
+		//-- Once a true case is found, execution continues with the code in the case to the end of the switch
+		//--		unless there is a break statement which says "go to the end of the switch"
 		switch (suit) {
-		case SPADE:
-		case CLUB:
+		case SPADE:			//-- Stacking cases is an "or"
+		case CLUB:			//-- is suit a SPADE or a CLUB
 			this.color = CardColor.BLACK;
-			break;
+			break;			//-- get out of the switch - resume execution at the end of the switch
 		case DIAMOND:
 		case HEART:
 			this.color = CardColor.RED;
@@ -153,12 +160,13 @@ public class PlayingCard {
 
 	public String toString() {                         // Return a String representation of the object
 		//-------------------------------------------------------------------------------------------------
-		// StringBuffer is a mutable version of String
+		//-- StringBuffer is a mutable version of String - a StringBuffer variable can be changed
+	//--												with creating a new variable in memory
 		//-------------------------------------------------------------------------------------------------
 		StringBuffer stringCard = new StringBuffer();  // Define an object to hold String version of object
 
 		int firstColumnSize = 16;                      // position of first tab position of screen line 
-
+//-- StringBuffer .append() does what the + does for a String + it concatenates / adds to end of String
 		stringCard.append("Value: " + value);          // Add literal to StringBuffer
 		stringCard.append(" (" + getIntValue() + ")"); // Add integer value of CardValue to StringBuffer
 		if (stringCard.length() < firstColumnSize) {   // If current StringBuffer size less than first tab position
@@ -190,7 +198,7 @@ public boolean equals(Object otherObject) {   // Compare two PlayingCards for eq
 	public int hashCode() {      // Generate hashCode for object if Java needs one e.g. for a HashMap
 	                             // HashCode is a unique value representing an instance of an object
 		int hashValue = 17;      // A prime number used in calculating the HashCode
-		int primeMultipler = 59; // A prime numbet used in calculating the HashCode
+		int primeMultipler = 59; // A prime number used in calculating the HashCode
 
 		hashValue = hashValue * primeMultipler + value.ordinal();  // Same values used in equals() 
 		hashValue = hashValue * primeMultipler + suit.ordinal();   //     should be used in the 

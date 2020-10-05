@@ -5,6 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 /***************************************************************************************************
  * Class to Simulate an American Playing Card Hand
+ * 
+ * This class implements the interface ValidCardHand so it MUST define the methods required
+ * 			by the ValidCardHand interface
+ * 
+ * This class is abstract because we don't want anyone to instantiate a generic CardHand
+ * 			so it can only be a super class
+ * 
+ * The abstract class is defining basic data and behaviors
+ * 
  ***************************************************************************************************/
 public abstract class CardHand   implements ValidCardHand  { 
 
