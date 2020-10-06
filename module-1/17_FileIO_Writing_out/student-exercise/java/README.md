@@ -27,12 +27,6 @@ Create a program to write out the result of FizzBuzz (1 to 300) to a file called
 * If the number is divisible by 3 and 5, print “FizzBuzz.”
 * Otherwise, print the number.
 
-To run the application, the following command should be run at the root of this directory:
-
-```
-mvn exec:java -Dexec.mainClass="com.techelevator.FizzWriter"
-```
-
 Expected Output:
 ```
 FizzBuzz.txt has been created.
@@ -40,8 +34,8 @@ FizzBuzz.txt has been created.
 
 Things to keep in mind:
 
-* When you run the command `wc -l FizzBuzz.txt`, the result should be `300 FizzBuzz.txt`.
-* Use the `less` command or your favorite text editor to verify the contents of the file are what you expect them to be. **The contents of the file _will_ be evaluated based on the requirements specified above**.
+* The command `wc -l FizzBuzz.txt` will display the number of lines in the file,  the result should be `300 FizzBuzz.txt`.
+* Use the `code  fixxBuzz.txt` command to view the file in Visual Studio Code to verify the contents of the file are what you expect them to be. **The contents of the file _will_ be evaluated based on the requirements specified above**.
 * A new file should be created each time the application runs.
 * There is no user interaction in this application. The application should run and terminate. You should not need to press a key to stop the application.
 
@@ -50,12 +44,6 @@ Things to keep in mind:
 Develop an application that takes a significantly large input file and splits it into smaller file chunks. These types of files were common back when floppy disks were smaller and couldn't hold a larger program on their own.
 
 To determine how many files need to be produced, ask the user for the maximum amount of lines that should appear in each output file.
-
-To run the application, the following command should be run at the root of this directory:
-
-```
-mvn exec:java -Dexec.mainClass="com.techelevator.FileSplitter"
-```
 
 Sample Input/Output:
 ```
@@ -112,7 +100,7 @@ Things to keep in mind:
        3 ./input-16.txt
       50 total
     ```
-* Use the `less` command or your favorite text editor to verify the contents of the file are what you expect them to be.
+* Use the `code` command to verify the contents of the file are what you expect them to be.
 * The input file name should be the prefix (the first part of the file name) followed by a dash (`-`), then the number of the current file, and finally ending with the file extension of the input file. For instance, if the name of the file was `big-old-file.md`, the file names should be `big-old-file-1.md`, `big-old-file-2.md`, etc.
 * Output files are written to the directory the input file is in.
 * The application should run and terminate. You should not need to press a key to stop the application.
