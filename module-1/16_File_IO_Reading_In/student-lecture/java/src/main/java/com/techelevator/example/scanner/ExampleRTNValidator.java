@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+//This program reads a text file and pastes it into the console
+// It checks to see if the bank routing transfer numbers are valid (hence the Valid/Invalid outputs)
+
 public class ExampleRTNValidator {
 	
 	private static final int[] CHECKSUM_WEIGHTS = new int[] { 3, 7, 1, 3, 7, 1, 3, 7, 1 };
@@ -12,8 +15,9 @@ public class ExampleRTNValidator {
                                           // throws - Tell the compiler I know this checked exception can happen
 		printApplicationBanner();
 		
-		File inputFile = getInputFileFromUser();   // inputFile is a File object for an existing file
-//		File inputFile = new File("rtn.txt");      // Hard-coding filename instead of asking user
+		File inputFile = getInputFileFromUser();   	// inputFile is a File object for an existing file
+													//inputFile will contain the path of an existing file
+		//File inputFile = new File("rtn.txt");      	// Hard-coding filename instead of asking user
 		try(Scanner fileScanner = new Scanner(inputFile)) {  // Putting the Scanner inside a try statement causes it to be automatically close
 		/*
 		 * Since we don't know how many lines are in a file
@@ -46,7 +50,15 @@ public class ExampleRTNValidator {
 		System.out.println("******************");
 		System.out.println();
 	}
-
+/*
+ * 
+ * Ask the user for the path to the input file to be used
+ * 
+ * Create a valid file object for a file and return it
+ * 
+ * it's static because it is being called by a static method - main()
+ * 
+ */
 	// Create a valid File object for a file and return it
 	@SuppressWarnings("resource")   // Don't give me warning about resource issues
 	private static File getInputFileFromUser() {
@@ -57,6 +69,10 @@ public class ExampleRTNValidator {
 		System.out.println("Path entered: "+ path + "\n");
 		
 		File inputFile = new File(path);        // Define a File object for the input file
+
+		
+		//-- Use FileObj.ethods() to be sure the path they gave us exists and is a file
+		
 //         FileObj.methods()		
 
 		if(inputFile.exists() == false) {               // checks for the existence of a file
