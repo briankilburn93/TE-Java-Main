@@ -1,8 +1,13 @@
 package com.techelevator.frank;
 
 import java.time.LocalDate;
+/*
+ * Define a generic Collection item - common data and methods
+ * 
+ * Used as a super classs to each individual item type - not meant to be instantiated - so make abstract
+ */
 
-public class CollectionItem {
+public abstract class CollectionItem {
 	
 	private String itemName;
 	private LocalDate whenAddedToCollection;

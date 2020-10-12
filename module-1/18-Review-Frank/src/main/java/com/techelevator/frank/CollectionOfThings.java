@@ -1,6 +1,7 @@
 package com.techelevator.frank;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,10 +10,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-
+/*
+ * This class will be used to hold information about various things a user might collect
+ * 
+ * A text file called collection.txt will have one line for each item a person collects
+ * 
+ * The filled containing the items will be loaded in to a Collection class object for ease, access, and manipulation
+ */
 public class CollectionOfThings {
 	
+	// enum provides a data type limited to specific constant values
+	// as a data type variables can be defined as the enum type
+	// variables defined as an enum may be assigned the constant defined for the enum
+	// user enum when you want to limit the values for a variable to a known set of values
+	
+	// It's OK to make enum public so users have access because they are constant they can't be changed
+	// enums are generally defined as static so there is only one copy shared by all objects of the class
+	
 	public static enum ITEM_TYPE {VINYL, COIN, STAMP, WINE, THING };
+	
+	// The items will be stored in a Map with the item type as the key and a list of objects as the value
+	// We are associating an ITEM_TYPE with a List of all of the items of that type we are holding
 	
 	Map<ITEM_TYPE,List<CollectionItem>> itemsInCollection;
 
