@@ -21,34 +21,55 @@ WHERE a.first_name = 'JUDY' AND a.last_name = 'DEAN'
 OR a.first_name = 'RIVER' AND a.last_name = 'DEAN';
 -- 4. All of the the ‘Documentary’ films
 -- (68 rows)
-SELECT f.film_id, f.title, c.category_id, c.name FROM film f
+SELECT  f.title, c.name FROM film f
 JOIN film_category fc ON f.film_id = fc.film_id
 JOIN category c ON c.category_id = fc.category_id
 WHERE c.name ='Documentary';
 -- 5. All of the ‘Comedy’ films
 -- (58 rows)
-SELECT f.film_id, f.title, c.category_id, c.name FROM film f
+SELECT f.title, c.name FROM film f
 JOIN film_category fc ON f.film_id = fc.film_id
 JOIN category c ON c.category_id = fc.category_id
 WHERE c.name ='Comedy';
 -- 6. All of the ‘Children’ films that are rated ‘G’
 -- (10 rows)
-
+SELECT f.title,  c.name FROM film f
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category c ON c.category_id = fc.category_id
+WHERE c.name ='Children' AND rating='G';
 -- 7. All of the ‘Family’ films that are rated ‘G’ and are less than 2 hours in length
 -- (3 rows)
-
+SELECT f.title, c.name FROM film f
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category c ON c.category_id = fc.category_id
+WHERE c.name ='Family' AND rating='G' AND length < 120;
 -- 8. All of the films featuring actor Matthew Leigh that are rated ‘G’
 -- (9 rows)
-
+SELECT f.title, a.first_name || ', ' || a.last_name AS actorName FROM film f
+JOIN film_actor fa ON fa.film_id = f.film_id
+JOIN actor a ON a.actor_id = fa.actor_id
+WHERE a.first_name = 'MATTHEW' AND a.last_name = 'LEIGH' AND f.rating='G';
 -- 9. All of the ‘Sci-Fi’ films released in 2006
 -- (61 rows)
-
+SELECT f.film_id, f.title, c.category_id, c.name FROM film f
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category c ON c.category_id = fc.category_id
+WHERE c.name ='Sci-Fi' AND release_year=2006;
 -- 10. All of the ‘Action’ films starring Nick Stallone
 -- (2 rows)
-
+SELECT f.title, a.first_name || ', ' || a.last_name AS actorName FROM film f
+JOIN film_actor fa ON fa.film_id = f.film_id
+JOIN actor a ON a.actor_id = fa.actor_id
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category c ON c.category_id = fc.category_id
+WHERE a.first_name = 'NICK' AND a.last_name = 'STALLONE' AND c.name ='Action';
 -- 11. The address of all stores, including street address, city, district, and country
 -- (2 rows)
-
+SELECT s.store_id, a.address, c.city, co.country FROM store s
+JOIN staff st ON s.store_id = st.store_id
+JOIN address a ON a.address_id = s.address_id
+JOIN city c ON c.city_id = a.city_id
+JOIN country co ON co.country_id = c.country_id;
 -- 12. A list of all stores by ID, the store’s street address, and the name of the store’s manager
 -- (2 rows)
 SELECT s.store_id, a.address, st.first_name || ' ' || st.last_name AS manager FROM store s
@@ -82,6 +103,20 @@ GROUP BY s.store_id, a.address;
 
 -- 19. The top 10 actors ranked by number of rentals of films starring that actor 
 -- (#1 should be “GINA DEGENERES�? with 753 rentals and #10 should be “SEAN GUINESS�? with 599 rentals)
-
+SELECT a.actor_id, a.first_name, a.last_name, count(*) FROM rental r
+JOIN inventory i ON i.inventory_id = r.inventory_id
+JOIN film_actor fa ON fa.film_id = i.film_id
+JOIN actor a ON a.actor_id = fa.actor_id
+GROUP BY a.actor_id, a.first_name, a.last_name
+ORDER BY COUNT(*) DESC LIMIT 10;
 -- 20. The top 5 “Comedy�? actors ranked by number of rentals of films in the “Comedy�? category starring that actor 
 -- (#1 should have 87 rentals and #5 should have 72 rentals)
+SELECT a.actor_id, a.first_name, a.last_name, count(*) FROM rental r
+JOIN inventory i ON i.inventory_id = r.inventory_id
+JOIN film_actor fa ON fa.film_id = i.film_id
+JOIN actor a ON a.actor_id = fa.actor_id
+JOIN film_category fc ON fc.film_id = i.film_id
+JOIN category c ON c.category_id = fc.category_id
+WHERE c.name ='Comedy'
+GROUP BY a.actor_id, a.first_name, a.last_name
+ORDER BY COUNT(*) DESC LIMIT 10;
