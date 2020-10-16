@@ -7,9 +7,20 @@
 -- ancient Greece", to the film table. The movie was released in 2008 in English.
 -- Since its an epic, the run length is 3hrs and 18mins. There are no special
 -- features, the film speaks for itself, and doesn't need any gimmicks.
-
+START TRANSACTION
+INSERT INTO inventory(film_id, store_id) SELECT (SELECT film_id FROM film WHERE title='Euclidean PI'), store_id FROM store;
+ROLLBACK
 -- 3. Hampton Avenue plays Euclid, while Lisa Byway plays his slightly
 -- overprotective mother, in the film, "Euclidean PI". Add them to the film.
+SELECT * FROM film WHERE title='VOICE PEACH'
+
+SELECT * FROM inventory i
+JOIN inventory ON i.film_id = s.store_id
+JOIN film f ON f.film_id = i.film_id
+JOIN store s ON i.store_id = s.store_id
+WHERE f.title='Euclidean PI';
+
+ROLLBACK
 
 -- 4. Add Mathmagical to the category table.
 
