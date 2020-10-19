@@ -105,3 +105,19 @@ SELECT * FROM city;
 -- 3. Try updating a language (Elvish should work) and commit
 
 -- 4. Demonstrate two different SQL connections trying to access the same table where one happens to be inside of a transaction but hasn't committed yet.
+
+
+
+
+
+--Random Tests
+
+SELECT * FROM country WHERE capital IS (SELECT id FROM city WHERE id IS (SELECT id FROM city WHERE name ='Washington'));--can't do SELECT in a SELECT (I think)
+
+START TRANSACTION
+UPDATE countrylanguage SET language='Jibberish' WHERE language='English';
+SELECT * from countrylanguage WHERE language='Jibberish';
+SELECT * from countrylanguage;
+ROLLBACK
+
+-- For DELETE, do NOT forget the WHERE clause
