@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS project_employee;
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS project;
+DROP TABLE IF EXISTS department;
+
 CREATE SEQUENCE seq_employee_id;
 
 CREATE TABLE employee (
