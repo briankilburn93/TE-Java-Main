@@ -2,8 +2,12 @@ DROP TABLE IF EXISTS project_employee;
 DROP TABLE IF EXISTS employee;
 DROP TABLE IF EXISTS project;
 DROP TABLE IF EXISTS department;
-
+DROP TABLE IF EXISTS contact;
 CREATE SEQUENCE seq_employee_id;
+
+SELECT employee_id FROM employee e WHERE NOT EXISTS (SELECT FROM project_employee WHERE employee_id = e.employee_id);
+
+SELECT * FROM project WHERE to_date > current_date OR to_date IS NULL;
 
 CREATE TABLE employee (
 	employee_id integer NOT NULL DEFAULT nextval('seq_employee_id'),

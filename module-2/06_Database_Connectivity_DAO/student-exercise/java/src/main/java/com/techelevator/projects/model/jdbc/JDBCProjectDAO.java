@@ -45,7 +45,6 @@ public class JDBCProjectDAO implements ProjectDAO {
 	}
 	
 	
-	
 	private Project mapRowToProject(SqlRowSet row) {
 		Project project = new Project();
 		
