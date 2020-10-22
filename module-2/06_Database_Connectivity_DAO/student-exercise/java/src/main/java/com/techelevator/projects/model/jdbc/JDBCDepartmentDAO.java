@@ -53,9 +53,11 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 
 	@Override
 	public Department createDepartment(Department newDepartment) {
-		String query = "INSERT INTO Department(name) VALUES(?)";
+		String query = "INSERT INTO Department VALUES(?,?)";
+		Long nextId = getNextDepartmentId();
 		
-		jdbcTemplate.update(query, newDepartment.getName());
+		jdbcTemplate.update(query, nextId, newDepartment.getName());
+		newDepartment.setId(nextId);
 		
 		return newDepartment;
 	}
@@ -78,6 +80,16 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 		dept.setName(row.getString("name"));
 		
 		return dept;
+	}
+	
+	private Long getNextDepartmentId() {
+		String query = "SELECT nextval('seq_department_id')";
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(query);
+				
+				if(rowSet.next()) {
+					return rowSet.getLong(1);
+				}
+				return null;
 	}
 
 }

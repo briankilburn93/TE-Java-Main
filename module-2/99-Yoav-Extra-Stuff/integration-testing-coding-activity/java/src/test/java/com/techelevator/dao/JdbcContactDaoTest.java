@@ -1,11 +1,15 @@
 package com.techelevator.dao;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -25,7 +29,7 @@ public class JdbcContactDaoTest {
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/addressbook");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/address");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("postgres1");
 		/* The following line disables autocommit for connections
@@ -65,6 +69,27 @@ public class JdbcContactDaoTest {
 		dataSource.getConnection().rollback();
 	}
 	
+	@Test
+	public void getContactById_withExistingId_Should_Return_Correct_Contact() {
+		Contact result = jdbcContactDao.getContactById(setupContact.getId());
+		
+		assertNotNull(result);
+		assertEquals(setupContact.getId(), result.getId());
+	}
+	
+	@Test
+	public void create_withValidContact_contact_Should_Get_Inserted() {
+		Contact newContact = getContact("FirstInsertTest", "LastInsertTest", "PhoneInsertTest","EmailInsertTest", 1995);
+				
+		jdbcContactDao.create(newContact);
+		
+		Contact resultContact = jdbcContactDao.getContactById(newContact.getId());
+		
+		assertNotNull(resultContact);
+		assertEquals(newContact.getId(), resultContact.getId());
+		assertEquals(newContact.getFirstName(), resultContact.getFirstName());
+	}
+	
 	private Contact getContact(String firstName, String lastName, String phone,
 			String email, Integer birthYear) {
 		Contact contact = new Contact();
@@ -86,10 +111,5 @@ public class JdbcContactDaoTest {
 		}
 		
 		return null;
-	}
-
-	private void assertEqual(Integer id, Integer id2) {
-		// TODO Auto-generated method stub
-		
 	}
 }

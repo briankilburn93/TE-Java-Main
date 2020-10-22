@@ -14,7 +14,7 @@ public class AddressBook {
 		
 		
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/addressbook");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/address");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("postgres1");
 

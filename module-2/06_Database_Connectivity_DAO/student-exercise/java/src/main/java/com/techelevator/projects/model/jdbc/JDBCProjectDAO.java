@@ -21,7 +21,7 @@ public class JDBCProjectDAO implements ProjectDAO {
 	
 	@Override
 	public List<Project> getAllActiveProjects() {
-		String query = "SELECT * FROM project WHERE to_date > current_date OR to_date IS NULL";
+		String query = "SELECT * FROM project WHERE to_date > current_date OR (to_date IS NULL AND from_date IS NOT NULL)";
 		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(query);
 		
 		List<Project> projectList = new ArrayList<>();
@@ -41,7 +41,8 @@ public class JDBCProjectDAO implements ProjectDAO {
 
 	@Override
 	public void addEmployeeToProject(Long projectId, Long employeeId) {
-		
+		String query = "INSERT INTO project_employee (project_id, employee_id) VALUES (?, ?)";
+		jdbcTemplate.update(query, projectId, employeeId);
 	}
 	
 	
@@ -51,8 +52,12 @@ public class JDBCProjectDAO implements ProjectDAO {
 		project.setId(row.getLong("project_id"));
 		project.setName(row.getString("name"));
 		project.setStartDate(row.getDate("from_date").toLocalDate());
-		project.setEndDate(row.getDate("to_date").toLocalDate());
 		
+		if(!(row.getDate("to_date") == null)) {
+			project.setEndDate(row.getDate("to_date").toLocalDate());
+		} else {
+			project.setEndDate(null);
+		}
 		return project;
 	}
 

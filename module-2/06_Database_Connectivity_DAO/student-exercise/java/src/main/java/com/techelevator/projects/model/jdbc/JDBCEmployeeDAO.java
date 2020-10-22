@@ -66,7 +66,7 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 
 	@Override
 	public List<Employee> getEmployeesWithoutProjects() {
-		String query = "SELECT employee_id FROM employee e WHERE NOT EXISTS (SELECT FROM project_employee WHERE employee_id = e.employee_id)";
+		String query = "SELECT * FROM employee e LEFT JOIN project_employee pe ON pe.employee_id = e.employee_id WHERE project_id IS NULL";
 		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(query);
 		List<Employee> result = new ArrayList<>();
 		
