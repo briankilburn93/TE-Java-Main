@@ -20,7 +20,7 @@ public abstract class DAOIntegrationTest {
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/user-manager");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/usermanager");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("postgres1");
 		/* The following line disables autocommit for connections
