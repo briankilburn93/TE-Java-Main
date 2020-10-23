@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -75,9 +74,9 @@ public class departmentTest {
 		
 		List<Department> departments = jdbcDepartmentDao.searchDepartmentsByName(result.getName());
 		jdbcDepartmentDao.createDepartment(result);
-		//jdbcDepartmentDao.searchDepartmentsByName(setupDepartment.getName());
 	
 		assertNotNull(result);
+		
 		for(Department dep : departments ) {
 			assertEquals(result.getName(), dep.getName());
 		}
