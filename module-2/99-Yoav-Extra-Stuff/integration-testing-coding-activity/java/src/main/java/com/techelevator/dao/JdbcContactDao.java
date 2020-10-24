@@ -67,7 +67,10 @@ public class JdbcContactDao implements ContactDao {
 
 	@Override
 	public void delete(Contact contact) {
-		// TODO Auto-generated method stub
+
+		String sql = "DELETE FROM contact WHERE id = ?";
+		
+		jdbcTemplate.update(sql, contact);
 		
 	}
 	

@@ -2,8 +2,11 @@ package com.techelevator.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -70,11 +73,62 @@ public class JdbcContactDaoTest {
 	}
 	
 	@Test
-	public void getContactById_withExistingId_Should_Return_Correct_Contact() {
+	public void getAllContacts_withValidId_shouldReturnContact() {
+		Contact extraContact = getContact("extraName", "extraLastName", "53453453", "something@gmail.com", 1990);
+		
+		extraContact = jdbcContactDao.create(extraContact);
+		
+		List<Contact> results = jdbcContactDao.getAllContacts();
+		
+		assertTrue(results.size() > 1);
+		
+		//assertNotNull(result);
+		//assertEquals(setupContact.getId(), result.getId());
+	}
+	
+	/*@Test
+	public void create_withValidData_shouldInsert() {
+		Contact extraContact = getContact("extraName", "extraLastName", "53453453", "something@gmail.com", 1990);
+		
+		extraContact = jdbcContactDao.create(extraContact);
+		Integer expected = extraContact.getId();
+		String
+		
+		Contact result = jdbcContactDao.getContactById(extraContact.getId());
+		
+		assertEquals(expected, result.getId());
+	}*/
+	
+	@Test
+	public void getContactById_withValidId_shouldReturnContact() {
 		Contact result = jdbcContactDao.getContactById(setupContact.getId());
 		
 		assertNotNull(result);
 		assertEquals(setupContact.getId(), result.getId());
+	}
+	
+	@Test
+	public void update_withValidData_shouldUpdate() {
+		setupContact.setFirstName("updatedName");
+		String expectedFirstName = "updatedName";
+		
+		jdbcContactDao.update(setupContact);
+		
+		Contact result = jdbcContactDao.getContactById(setupContact.getId());
+		
+		assertEquals(expectedFirstName, result.getFirstName());
+	}
+	
+	@Test
+	public void delete_withExistingContact_shouldDelete() {
+		
+		Integer setupContactId = setupContact.getId();
+		
+		jdbcContactDao.delete(setupContact);
+		
+		Contact result = jdbcContactDao.getContactById(setupContact.getId());
+		
+		assertNull(result);
 	}
 	
 	@Test

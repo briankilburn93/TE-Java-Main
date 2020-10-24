@@ -14,6 +14,7 @@ import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.projects.model.Employee;
+import com.techelevator.projects.model.Project;
 import com.techelevator.projects.model.jdbc.JDBCEmployeeDAO;
 
 public class employeeTest {
@@ -76,6 +77,17 @@ public class employeeTest {
 					return rowSet.getLong(1);
 				}
 				return null;
+	}
+	
+	private Employee getEmployee(String firstName, String lastName, LocalDate birthDay, char gender, LocalDate hireDate) {
+		Employee employee = new Employee();
+		employee.setFirstName(firstName);
+		employee.setLastName(firstName);
+		employee.setBirthDay(birthDay);
+		employee.setGender(gender);
+		employee.setHireDate(hireDate);
+		
+		return employee;
 	}
 
 }
