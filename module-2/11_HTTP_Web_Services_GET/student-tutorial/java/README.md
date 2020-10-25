@@ -1,238 +1,497 @@
-# Web Services Get Tutorial (Java)
+# Server Side APIs: Part 1 Tutorial
 
-In this tutorial, you'll work on a command-line application that displays Tech Elevator locations. The command-line application is partially complete. You'll write the remaining functionality.
+In this tutorial, you'll work on an application that uses Tech Elevator Locations as the data model. In this locations application, you'll create an API that allows others to get a list of locations, as well as the ability to add new ones.
 
-Once the application is running, you'll need to call a web API to both get a list of locations and the details for a single application.
+## Step One: Create, import, and run a new project
 
-## Step one: Start the server
+In this section of the tutorial, you'll create a new project, import it into Eclipse, and run it.
 
-Before you start, you need to ensure that the web API is up and running. You need to change directories into the `./server/` folder.
+### 1. Bootstrap your application
 
-Next, from the command line, run the command `npm install` to install any dependencies. You won't need to do this on any subsequent run.
+The first thing to do is create a new project. You'll use the [Spring Initializr](https://start.spring.io/) to bootstrap your application. Be sure that your project configuration matches the following:
 
-While still in the command line, run the command `npm start` to start the server. If there aren't any errors, you'll see the following, which means that you've successfully set up your web API:
+- Project: Maven Project
+- Language: Java
+- Spring Boot: Latest Stable Version (2.2.7)
+- Group: com.techelevator
+- Artifact: locations
+- Dependencies: Spring Web Starter, Validation, Spring Boot Devtools
 
-```
-Resources
-http://localhost:3000/locations
-```
+![New Project](img/start-spring-io.png)
 
-```
- \{^_^}/ hi!
+When you click **Generate Project**, it creates a zip file and begins downloading to your computer. When the download is complete, extract the zip file to a location on your hard drive where you want to keep the project.
 
-  Loading ./locations.json
-  Done
+### 2. Import project into Eclipse
 
-  Resources
-  http://localhost:3000/locations
+Next, you need to import the project into Eclipse. To do so, open Eclipse and select `File > Import > Maven > Existing Maven Projects`.
 
-  Home
-  http://localhost:3000
+![Eclipse Import](img/eclipse-import.png)
 
-  Type s + enter at any time to create a snapshot of the database
-  Watching...
-```
+To import your project, click into the `locations` folder, and select `Open`. This takes you to the "Select Maven Projects" screen and by default, the `pom.xml` file is selected.
 
-> You can stop the server, or any other process that you've started from the console, by using the keyboard shortcut `ctrl + c`.
+![pom.xml](img/eclipse-select-maven-project.png)
 
-## Step Two: Explore the API
+After that, click "Finish" to import your project.
 
-Before moving on to the next step, explore the web API using Postman. You can access the following endpoints:
+### 3. Run your project
 
-- GET: http://localhost:3000/locations
-- GET: http://localhost:3000/locations/{id}
+Now that you've set up your project in Eclipse, run it to make sure everything works. It's best to make sure the application runs before adding anything new to it.
 
-## Step Three: Review the starting code
+Navigate to `src/main/java/com/techelevator/locations`, right-click on `LocationsApplication.java`,  and select `Run As > Java Application`. Some logging appears in the Console. The last line tells you that the application has started.
 
-#### Data Model
+![First Run](img/spring-boot-running.png)
 
-There's a class in  `/src/main/java/com/techelevator/locations/Location.java` that represents the data model for a location object.
+You can also run and debug your application by using the icons in your toolbar.
 
-#### Driver
+![Toolbar Run & Debug](img/run-options.png)
 
-You'll find the `Main()` method in `/src/main/java/com/techelevator/locations/App.java`.
+If you open a browser window and visit http://localhost:8080, you'll see a screen that looks like this:
 
-#### Provided Code
+![Whitelabel Error Page](img/whitelabel-error-page.png)
 
-Also in the `App.java` file, you'll find several private methods that you'll use to print information to the console:
+Do you know why this error page appears? If you answered, "because there is no route set up for the root context `/`", you're correct. If you try to visit a route that doesn't have a Request Mapping defined, this error page appears by default.
 
-- `printGreeting()`: Prints the welcome greeting along with the menu options
-- `printLocations()`: Prints a list of locations
-- `printLocation()`: Prints a single location
+## Step Two: Create the Location controller
 
-#### Your Code
+Your application is running, but it doesn't do anything yet. This is because you haven't defined any routes or actions to take when someone visits that route. Routes are entry ways into your application, and they're defined inside of a controller.
 
-The main method calls a method called `run`. You'll place most of the code you write inside the `run()` method:
+Before creating any controllers, create a new package called `controllers` inside of your main package `com.techelevator.locations`. This is where your controllers live.
+
+In your new controllers package, create a new class called `LocationController.java`:
 
 ```java
-public static void main(String[] args) {
-  run();
+package com.techelevator.locations.controllers;
+
+public class LocationController {
+
+}
+```
+Next, use the `@RestController` annotation to tell the Spring Framework that this class is a REST Controller class:
+
+```java
+package com.techelevator.locations.controllers;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class LocationController {
+
 }
 ```
 
-## Step Four: Write the console application
+## Step Three: Create a Location model
 
-In `run()`, you need to create a new `Scanner` instance to read in user input. The `printGreeting()` method displays the greeting and asks the user to select one of the menu options:
+Like most applications, you need data to make it interesting. This could come from many different places like a local file, a database, or even another API. In this tutorial, you'll store the data in a `List<>`.
 
-```java
-Scanner scanner = new Scanner(System.in);
-printGreeting();
-```
+In the previous command line application, the Location model had the following properties:
 
-If you run the application, you'll see the following:
+- id
+- name
+- address
+- city
+- state
+- zip
 
-```
-Welcome to Tech Elevator Locations. Please make a selection:
-1: List Tech Elevator Locations
-2: Exit
+Now that you know what properties make up your model, you need to create one. To get started, create a new package called `models` where your models live.
 
-Please choose an option:
-```
-
-Next, you'll need to read in the user's choice. You can use the scanner to read the next line, which returns a `String`. Then, you need to parse that String into an `int`.
-
-Finally, you'll catch an exception if the user's input can't be parsed to an `int`:
+In that package, create a class called `Location.java` and paste in the following code:
 
 ```java
-  int menuSelection = 0;
-  try {
-    menuSelection = Integer.parseInt(scanner.nextLine());
-  } catch (NumberFormatException exception) {
-    System.out.println("Error parsing the input for menu selection.");
-  }
-  System.out.println("");
-```
+package com.techelevator.locations.models;
 
-Now that you have the user's selection, you can decide what action to take next:
+public class Location {
 
-```java
-if (menuSelection == 1) {
-  // list locations
-} else if (menuSelection == 2) {
-  scanner.close();
-  System.exit(0);
-} else {
-  System.out.println("Invalid Selection");
+    private int id;
+    private String name;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
+
+    public Location() {
+    }
+
+    public Location(int id, String name, String address, String city, String state, String zip) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return "Location [id=" + id + ", name=" + name + "]";
+    }
 }
 ```
 
-## Step Five: List all locations
+> Java is verbose when it comes to Plain old Java Objects (POJOs), but thankfully, you don't have to type all of that code. If you're creating your own Model, type out the properties and then use the IDE to generate Constructors, Getters, Setters, and toString() methods.
 
-If the user selects `1`, you need to list all of the locations returned from the web API. The first thing you'll do is set up a static variable for the `API_URL` because you'll use this several times. Place this above the `main()` method:
-
-```java
-private static final String API_URL = "http://localhost:3000/locations";
-```
-
-Next, you'll create a new instance of the RestTemplate. This is the class that you use to perform a `GET` request to the web API. The locations API returns an array of locations so that's the return type that you are using here.
-
-Finally, call the `printLocations()` method and pass in the array of locations you got back from the API:
+With your model in place, you can set up some initial data to expose in your API:
 
 ```java
-if (menuSelection == 1) {
-  // list locations
-  RestTemplate restTemplate = new RestTemplate();
-  Location[] locations = restTemplate.getForObject(API_URL, Location[].class);
-  printLocations(locations);
+@RestController
+public class LocationController {
+
+    private List<Location> locations = new ArrayList<>();
+
+    public LocationController() {
+        locations.add(new Location(1,
+                "Tech Elevator Cleveland",
+                "7100 Euclid Ave #14",
+                "Cleveland",
+                "OH",
+                "44103"));
+        locations.add(new Location(2,
+                "Tech Elevator Columbus",
+                "1275 Kinnear Rd #121",
+                "Columbus",
+                "OH",
+                "43212"));
+        locations.add(new Location(3,
+                "Tech Elevator Cincinnati",
+                "1776 Mentor Ave Suite 355",
+                "Cincinnati",
+                "OH",
+                "45212"));
+        locations.add(new Location(4,
+                "Tech Elevator Pittsburgh",
+                "901 Pennsylvania Ave #3",
+                "Pittsburgh",
+                "PA",
+                "15233"));
+        locations.add(new Location(5,
+                "Tech Elevator Detroit",
+                "440 Burroughs St #316",
+                "Detroit",
+                "MI",
+                "48202"));
+        locations.add(new Location(6,
+                "Tech Elevator Philadelphia",
+                "30 S 17th St",
+                "Philadelphia",
+                "PA",
+                "19203"));
+    }
+
 }
 ```
 
-If you run the application, you should see:
+## Step Four: Get a list of locations
 
-```
-Welcome to Tech Elevator Locations. Please make a selection:
-1: List Tech Elevator Locations
-2: Exit
+Now you've set up a basic controller, a model that represents a location, and some initial data. The first method you'll expose in your API is a way to get a list of all the locations.
 
-Please choose an option: 1
-
---------------------------------------------
-Locations
---------------------------------------------
-1: Tech Elevator Cleveland
-2: Tech Elevator Columbus
-3: Tech Elevator Cincinnati
-4: Tech Elevator Pittsburgh
-5: Tech Elevator Detroit
-6: Tech Elevator Philadelphia
-
-Please enter a location id to get the details:
-```
-
-## Step Six: Get Location Data
-
-In the last step, you returned a list of locations to the user. The last line of the `printLocations()` method asks the user to select a location. When the user selects a location, you'll read in their response:
+To do so, you'll set up a `RequestMapping` for `/locations`. This method returns the list of locations, and thanks to Spring, it's converted to an array of JSON objects:
 
 ```java
-int id = 0;
-try {
-  id = Integer.parseInt(scanner.nextLine());
-} catch (NumberFormatException exception) {
-  System.out.println("Error parsing the input for location id.");
+@RequestMapping( path = "/locations", method = RequestMethod.GET)
+public List<Location> list() {
+    return locations;
 }
 ```
 
-Next, you'll validate the user's input. If the number they enter is greater than 0 and less than the number of locations returned, you can consider it valid. This is because there's a fixed number of results and each result has a corresponding ID. The `if` statement conditional looks like this:
+You can visit http://localhost:8080/locations using the browser, since this is a GET request, or you can use Postman. You'll get a list of locations in JSON format:
 
-```java
-if (id > 0 && id <= locations.length) { ... }
+```js
+[
+  {
+    id: 1,
+    name: 'Tech Elevator Cleveland',
+    address: '7100 Euclid Ave #14',
+    city: 'Cleveland',
+    state: 'OH',
+    zip: '44103',
+  },
+  {
+    id: 2,
+    name: 'Tech Elevator Columbus',
+    address: '1275 Kinnear Rd #121',
+    city: 'Columbus',
+    state: 'OH',
+    zip: '43212',
+  },
+  {
+    id: 3,
+    name: 'Tech Elevator Cincinnati',
+    address: '1776 Mentor Ave Suite 355',
+    city: 'Cincinnati',
+    state: 'OH',
+    zip: '45212',
+  },
+  {
+    id: 4,
+    name: 'Tech Elevator Pittsburgh',
+    address: '901 Pennsylvania Ave #3',
+    city: 'Pittsburgh',
+    state: 'PA',
+    zip: '15233',
+  },
+  {
+    id: 5,
+    name: 'Tech Elevator Detroit',
+    address: '440 Burroughs St #316',
+    city: 'Detroit',
+    state: 'MI',
+    zip: '48202',
+  },
+  {
+    id: 6,
+    name: 'Tech Elevator Philadelphia',
+    address: '30 S 17th St',
+    city: 'Philadelphia',
+    state: 'PA',
+    zip: '19203',
+  },
+];
 ```
 
-Now that you have the ID, you can use the `restTemplate` instance that you already created. You'll use this to call the `API_URL` with the ID appended. If you had a chance to test the API in Postman, you know that calling `/locations/1` returns the location data for Tech Elevator Cleveland. Once you have the location, you can pass it to the `printLocation()` method to print it to the console:
+## Step Five: Add a location
+
+You know how to get a list of the locations; now, you need to add a location. The path for this is still `/locations`, which is the same path as the previous one.
+
+The only difference is the request method that this method accepts, `RequestMethod.POST`. This allows you to have the same path for similar resources, which are usually grouped within the same controller.
+
+To define the method, use the `RequestMethod` POST:
 
 ```java
-if (id > 0 && id <= locations.length) {
-  Location location = restTemplate.getForObject(API_URL + "/" + id, Location.class);
-  printLocation(location);
-} else {
-  System.out.println("Invalid Location Id.");
+@RequestMapping( value = "/locations", method = RequestMethod.POST)
+public void add(@RequestBody Location location) {
+    if( location != null ) {
+        locations.add(location);
+    }
 }
 ```
 
-If you run the application, you'll see this:
+Unlike the GET example, you can't visit the POST `/locations` in the browser. If you try to, the browser runs a GET operation and you're returned the list of locations.
 
-```
-Welcome to Tech Elevator Locations. Please make a selection:
-1: List Tech Elevator Locations
-2: Exit
+You need to open Postman, and send a POST request to `/locations`. Make sure to set the `Content-Type` to `application/json`.
 
-Please choose an option: 1
+In the body of the request, enter the following JSON content that sends a new location:
 
---------------------------------------------
-Locations
---------------------------------------------
-1: Tech Elevator Cleveland
-2: Tech Elevator Columbus
-3: Tech Elevator Cincinnati
-4: Tech Elevator Pittsburgh
-5: Tech Elevator Detroit
-6: Tech Elevator Philadelphia
-
-Please enter a location id to get the details: 1
-
---------------------------------------------
-Location Details
---------------------------------------------
-Id: 1
-Name: Tech Elevator Cleveland
-Address: 7100 Euclid Ave #140
-City: Cleveland
-State: OH
-Zip: 44103
+```js
+{
+	"id": 7,
+	"name": "Tech Elevator Hawaii",
+	"address": "1234 Kalia Rd",
+	"city": "Honolulu",
+	"state": "HI",
+	"zip": "96815"
+}
 ```
 
-Last but certainly not least, make sure to close the `scanner` and exit the program:
+If you followed the instructions correctly, you'll see a status code of 200 after you hit "Send."
+
+![Locations Add 200](img/locations-add-200.png)
+
+If you run another GET on `/locations`, you'll see your new location added to the list:
+
+```js
+[
+  {
+    id: 1,
+    name: 'Tech Elevator Cleveland',
+    address: '7100 Euclid Ave #14',
+    city: 'Cleveland',
+    state: 'OH',
+    zip: '44103',
+  },
+  {
+    id: 2,
+    name: 'Tech Elevator Columbus',
+    address: '1275 Kinnear Rd #121',
+    city: 'Columbus',
+    state: 'OH',
+    zip: '43212',
+  },
+  {
+    id: 3,
+    name: 'Tech Elevator Cincinnati',
+    address: '1776 Mentor Ave Suite 355',
+    city: 'Cincinnati',
+    state: 'OH',
+    zip: '45212',
+  },
+  {
+    id: 4,
+    name: 'Tech Elevator Pittsburgh',
+    address: '901 Pennsylvania Ave #3',
+    city: 'Pittsburgh',
+    state: 'PA',
+    zip: '15233',
+  },
+  {
+    id: 5,
+    name: 'Tech Elevator Detroit',
+    address: '440 Burroughs St #316',
+    city: 'Detroit',
+    state: 'MI',
+    zip: '48202',
+  },
+  {
+    id: 6,
+    name: 'Tech Elevator Philadelphia',
+    address: '30 S 17th St',
+    city: 'Philadelphia',
+    state: 'PA',
+    zip: '19203',
+  },
+  {
+    id: 7,
+    name: 'Tech Elevator Hawaii',
+    address: '1234 Kalia Rd',
+    city: 'Honolulu',
+    state: 'HI',
+    zip: '96815',
+  },
+];
+```
+
+## Step Six: Return a Random location
+
+You've been tasked with creating one additional route in your API:
+
+- Random
+  - path: /locations/random
+  - return: a random Location from the list of locations
+
+Try to work on the problem by yourself before you move on and see what the solution might look like.
+
+## Solution
+
+This is what your controller looks like when you've completed the tutorial:
 
 ```java
-scanner.close();
-System.exit(0);
+package com.techelevator.locations.controllers;
+
+import com.techelevator.locations.models.Location;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+@RestController
+public class LocationController {
+
+    private List<Location> locations = new ArrayList<>();
+
+    public LocationController() {
+        locations.add(new Location(1,
+                "Tech Elevator Cleveland",
+                "7100 Euclid Ave #14",
+                "Cleveland",
+                "OH",
+                "44103"));
+        locations.add(new Location(2,
+                "Tech Elevator Columbus",
+                "1275 Kinnear Rd #121",
+                "Columbus",
+                "OH",
+                "43212"));
+        locations.add(new Location(3,
+                "Tech Elevator Cincinnati",
+                "1776 Mentor Ave Suite 355",
+                "Cincinnati",
+                "OH",
+                "45212"));
+        locations.add(new Location(4,
+                "Tech Elevator Pittsburgh",
+                "901 Pennsylvania Ave #3",
+                "Pittsburgh",
+                "PA",
+                "15233"));
+        locations.add(new Location(5,
+                "Tech Elevator Detroit",
+                "440 Burroughs St #316",
+                "Detroit",
+                "MI",
+                "48202"));
+        locations.add(new Location(6,
+                "Tech Elevator Philadelphia",
+                "30 S 17th St",
+                "Philadelphia",
+                "PA",
+                "19203"));
+    }
+
+    @RequestMapping( path = "/locations", method = RequestMethod.GET )
+    public List<Location> list() {
+        return locations;
+    }
+
+    @RequestMapping( value = "/locations", method = RequestMethod.POST)
+    public void add(@RequestBody Location location) {
+        if( location != null ) {
+            locations.add(location);
+        }
+    }
+
+    @RequestMapping( path = "/locations/random", method = RequestMethod.GET )
+    public Location random() {
+        return locations.get(new Random().nextInt(locations.size()));
+    }
+
+}
 ```
 
 ## Summary
 
-In this tutorial you learned:
+In this tutorial, you learned:
 
-- How to make an HTTP GET request using Postman and inspect the result
-- How to make an HTTP GET request to a RESTful web service using Java process the response
-- How to convert a single JSON object into a Java Object
-- How to convert an array of JSON objects into an array of Java Objects
+- How to create a new Spring Boot application using the Spring Initializr
+- How to create a Rest Controller
+- How to create Request Mappings to respond to requests
+- How to test your API in Postman
