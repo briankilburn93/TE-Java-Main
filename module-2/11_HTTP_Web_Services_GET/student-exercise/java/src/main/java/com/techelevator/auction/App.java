@@ -24,23 +24,57 @@ public class App {
     }
 
     public static Auction[] listAllAuctions() {
-        // api code here
-        return null;
+    	Auction[] theAuctions = restTemplate.getForObject(API_URL, Auction[].class);
+    	return theAuctions;
     }
 
     public static Auction listDetailsForAuction() {
-        // api code here
-        return null;
+    	Scanner aucScanner = new Scanner(System.in);
+    	int idExtension = 999;
+        
+    	System.out.println("Enter an auction id: ");
+        try {
+                idExtension = Integer.parseInt(aucScanner.nextLine());	// Get input from user and convert to int
+            } catch (NumberFormatException exception) {		// handle the error if doesn't enter a number
+                System.out.println("Error parsing the input for menu selection.");
+            }
+        System.out.println("");
+        
+        Auction theAuction = restTemplate.getForObject(API_URL + "/" + idExtension, Auction.class);
+    	return theAuction;
     }
 
     public static Auction[] findAuctionsSearchTitle() {
-        // api code here
+    	System.out.println("Enter a title to search for: ");
+    	String titleSearch = "";
+    	Scanner titleScanner = new Scanner(System.in);
+    	
+        try {
+        	titleSearch = titleScanner.nextLine();
+        	Auction[] theAuctions = restTemplate.getForObject(API_URL + "?title_like=" + titleSearch, Auction[].class);
+        	return theAuctions;
+        } catch (HttpClientErrorException exception) {
+        	System.out.println("404 NOT FOUND");
+        }
+        System.out.println("");
         return null;
     }
 
     public static Auction[] findAuctionsSearchPrice() {
-        // api code here
-        return null;
+    	Scanner aucScanner = new Scanner(System.in);
+    	double priceSearch = 999;
+        
+    	System.out.println("Enter a maximum price to search by $: ");
+        try {
+                priceSearch = Double.parseDouble(aucScanner.nextLine());	// Get input from user and convert to int
+            } catch (NumberFormatException exception) {		// handle the error if doesn't enter a number
+                System.out.println("Error parsing the input for menu selection.");
+            }
+        System.out.println("");
+    	
+        
+        Auction[] theAuctions = restTemplate.getForObject(API_URL + "?currentBid_lte=" + priceSearch, Auction[].class);
+    	return theAuctions;
     }
 
     private static void run() {

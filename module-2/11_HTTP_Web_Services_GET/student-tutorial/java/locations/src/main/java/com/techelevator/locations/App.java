@@ -5,12 +5,54 @@ import java.util.Scanner;
 import org.springframework.web.client.RestTemplate;
 
 public class App {
+	
+	private static final String API_URL = "http://localhost:3000/locations";
 
   public static void main(String[] args) {
+	  Scanner scanner = new Scanner(System.in);
+	  printGreeting();
+	  
+	  int menuSelection = 0;
+	  
+	  try {
+		  menuSelection = Integer.parseInt(scanner.nextLine());
+	  } catch (NumberFormatException exception) {
+		  System.out.println("Error parsing the input for menu selection.");
+	  }
+	  System.out.println("");
+	  
+	  if(menuSelection == 1) {
+		  //list locations
+		  RestTemplate restTemplate = new RestTemplate();
+		  Location[] locations = restTemplate.getForObject(API_URL, Location[].class);
+		  printLocations(locations);
+		  
+		  int id = 0;
+		  
+		  try {
+		        id = Integer.parseInt(scanner.nextLine());
+		      } catch (NumberFormatException exception) {
+		        System.out.println("Error parsing the input for location id.");
+		      }
+		      if (id > 0 && id <= locations.length) {
+		        Location location = restTemplate.getForObject(API_URL + "/" + id, Location.class);
+		        printLocation(location);
+		      } else {
+		        System.out.println("Invalid Location Id.");
+		      }
+		  
+	  } else if(menuSelection == 2) {
+		  scanner.close();
+		  System.exit(0);
+	  } else {
+		  System.out.println("Invalid Selection");
+	  }
+	  
     run();
   }
 
   private static void run() {
+	  
   }
 
   private static void printGreeting() {

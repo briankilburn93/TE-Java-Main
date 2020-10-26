@@ -25,6 +25,8 @@ public class App {
     System.out.println("");
 
     if (menuSelection == 1) {
+
+    	
       RestTemplate restTemplate = new RestTemplate();
       Location[] locations = restTemplate.getForObject(API_URL, Location[].class);
       printLocations(locations);

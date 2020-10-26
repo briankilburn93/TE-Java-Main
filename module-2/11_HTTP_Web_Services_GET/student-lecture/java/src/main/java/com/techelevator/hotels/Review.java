@@ -1,5 +1,9 @@
 package com.techelevator.hotels;
 
+//POJO for Hotel data being returned from our API call
+// To easily gain access to data returned form an API
+// we need a POJO - further details will be forthcoming later in class
+
 public class Review {
     private int hotelID;
     private String title;
@@ -7,8 +11,8 @@ public class Review {
     private String author;
     private int stars;
 
-    public Review() {
-    }
+    public Review() {	// default ctr is required for a POJO
+    }    				//	we have nothing to initialize so this ctr is empty
 
     @Override
     public String toString() {
