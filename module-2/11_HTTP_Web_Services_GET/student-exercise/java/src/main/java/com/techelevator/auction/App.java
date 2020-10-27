@@ -35,13 +35,14 @@ public class App {
     	System.out.println("Enter an auction id: ");
         try {
                 idExtension = Integer.parseInt(aucScanner.nextLine());	// Get input from user and convert to int
-            } catch (NumberFormatException exception) {		// handle the error if doesn't enter a number
+                Auction theAuction = restTemplate.getForObject(API_URL + "/" + idExtension, Auction.class);
+            	return theAuction;
+        } catch (NumberFormatException exception) {		// handle the error if doesn't enter a number
                 System.out.println("Error parsing the input for menu selection.");
             }
         System.out.println("");
         
-        Auction theAuction = restTemplate.getForObject(API_URL + "/" + idExtension, Auction.class);
-    	return theAuction;
+        return null;
     }
 
     public static Auction[] findAuctionsSearchTitle() {
@@ -67,14 +68,15 @@ public class App {
     	System.out.println("Enter a maximum price to search by $: ");
         try {
                 priceSearch = Double.parseDouble(aucScanner.nextLine());	// Get input from user and convert to int
-            } catch (NumberFormatException exception) {		// handle the error if doesn't enter a number
+                Auction[] theAuctions = restTemplate.getForObject(API_URL + "?currentBid_lte=" + priceSearch, Auction[].class);
+            	return theAuctions;
+        } catch (NumberFormatException exception) {		// handle the error if doesn't enter a number
                 System.out.println("Error parsing the input for menu selection.");
             }
         System.out.println("");
-    	
+    	return null;
         
-        Auction[] theAuctions = restTemplate.getForObject(API_URL + "?currentBid_lte=" + priceSearch, Auction[].class);
-    	return theAuctions;
+        
     }
 
     private static void run() {

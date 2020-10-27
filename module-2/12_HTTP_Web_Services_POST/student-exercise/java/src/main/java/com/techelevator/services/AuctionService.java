@@ -68,18 +68,56 @@ public class AuctionService {
     }
 
     public Auction add(String auctionString) {
-        // place code here
-        return null;
+    	Auction auction = makeAuction(auctionString);
+        if(auction == null) {
+        	console.printError("Invalid auction data");
+        	return null;
+        } try {
+        	HttpHeaders aHeaders = new HttpHeaders();
+        	aHeaders.setContentType(MediaType.APPLICATION_JSON);
+        	HttpEntity anEntity = new HttpEntity(auction, aHeaders);
+        	auction = restTemplate.postForObject(BASE_URL, anEntity, Auction.class);
+        } catch(RestClientResponseException ex) {
+        	console.printError("No auctions found. Please try again.");
+        	return null;
+        } catch(ResourceAccessException ex) {
+            console.printError("A network error occurred.");
+            return null;
+        }
+        	return auction;
     }
 
     public Auction update(String auctionString) {
-        // place code here
-        return null;
+        Auction auction = makeAuction(auctionString);
+        if(auction == null) {
+        	console.printError("Invalid auction data");
+        	return null;
+        } try {
+        	HttpHeaders aHeaders = new HttpHeaders();
+        	aHeaders.setContentType(MediaType.APPLICATION_JSON);
+        	HttpEntity anEntity = new HttpEntity(auction, aHeaders);
+        	restTemplate.put(BASE_URL + "/" + auction.getId(), anEntity);
+        } catch (RestClientResponseException ex) {
+            console.printError("No auctions found. Please try again.");
+            return null;
+        } catch (ResourceAccessException ex) {
+            console.printError("A network error occurred.");
+            return null;
+        }
+        	return auction;
     }
 
     public boolean delete(int id) {
-    	// place code here
-    	return false; 
+    	try {
+    		restTemplate.delete(BASE_URL + "/" + id);
+    	} catch(RestClientResponseException ex) {
+        	console.printError("No auctions found. Please try again.");
+        	return false;
+        } catch(ResourceAccessException ex) {
+            console.printError("A network error occurred.");
+            return false;
+        }
+        	return true;
     }
 
     private HttpEntity<Auction> makeEntity(Auction auction) {
