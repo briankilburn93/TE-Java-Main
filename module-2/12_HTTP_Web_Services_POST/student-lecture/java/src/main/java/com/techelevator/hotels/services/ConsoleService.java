@@ -6,11 +6,11 @@ import com.techelevator.hotels.models.Reservation;
 import java.util.Scanner;
 
 public class ConsoleService {
+// This is a class to handle interactions with a console (keyboard and screen)
+  private Scanner scanner;				// Define a reference to a Scanner
 
-  private Scanner scanner;
-
-  public ConsoleService() {
-    scanner = new Scanner(System.in);
+  public ConsoleService() {				// ctor for this class - initialize data for class
+    scanner = new Scanner(System.in);	// instantiate a Scanner object for the class
   }
 
   public int printMainMenu() {

@@ -13,16 +13,17 @@ public class App {
         int menuSelection = 999;
         int hotelId = -1;
 
+        // Instantiate Service objects to handle console and Hotel interactions
         ConsoleService consoleService = new ConsoleService();
-        HotelService hotelService = new HotelService(API_BASE_URL);
+        HotelService hotelService = new HotelService(API_BASE_URL);	// Instantiate Hotel Service with this API
 
         while (menuSelection != 0) {
-            menuSelection = consoleService.printMainMenu();
+            menuSelection = consoleService.printMainMenu();	// Use ConsoleService to display the menu
             if(menuSelection == 1) {
                 // List all hotels
-                Hotel[] hotels = hotelService.listHotels();
+                Hotel[] hotels = hotelService.listHotels();	// Use HotelService to get a list of Hotels
                 if( hotels != null ){
-                    consoleService.printHotels(hotels);
+                    consoleService.printHotels(hotels);	// Use ConsoleService to print Hotels
                 }
             } else if(menuSelection == 2) {
                 // List Reservations for hotel

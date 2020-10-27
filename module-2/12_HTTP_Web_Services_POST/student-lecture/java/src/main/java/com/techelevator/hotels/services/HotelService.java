@@ -13,12 +13,12 @@ import java.util.Random;
 
 public class HotelService {
 
-  private final String BASE_URL;
-  private final RestTemplate restTemplate = new RestTemplate();
-  private final ConsoleService console = new ConsoleService();
+  private final String BASE_URL;		// Define a reference to hold the URL for the API to be called
+  private final RestTemplate restTemplate = new RestTemplate();	// Define and instantiate a RestTemplate
+  private final ConsoleService console = new ConsoleService();	// Use ConsoleService to handle user interaction
 
-  public HotelService(String url) {
-    BASE_URL = url;
+  public HotelService(String url) {	// Receive an API URL from the user
+    BASE_URL = url;					// Assign URL passed from user to the BASE_URL we use in this code
   }
 
   /**
@@ -28,8 +28,45 @@ public class HotelService {
    * @return Reservation
    */
   public Reservation addReservation(String newReservation) {
-    // TODO: Implement method
-    return null;
+    // add a Reservation to API - we need to use HTTP POST request
+	// When we do a POST we need to put the data in request body
+	  
+	  
+	  // Create a Reservation object from the String passed into this method
+	  //	using the helper method makeReservation defined below
+	  Reservation aReservation = makeReservation(newReservation);
+	  
+	  // always a good practice to be sure you have an object
+	  if(aReservation == null) {
+		  console.printError("Invalid data for a Reservation");
+		  return null;
+	  }
+	  
+	  // Now that we have a Reservation object we need to send to server cia API
+	  // using an HTTP POST request
+	  
+	  //A POST request requires headers to tell the server about the request
+	  // 	and the data for the request has to be in the body of the request
+	  
+	  HttpHeaders theHeader = new HttpHeaders();	// Instantiate an object for request headers
+	  
+		// Tell server we're sending it JSON data
+	  theHeader.setContentType(MediaType.APPLICATION_JSON);	// MediaType is a group of constants for datatypes you can send to server
+	  
+	  // So we have the object to send to the server and the headers to describe the data
+	  // All that's left is to combine them into an HTTP Request using HttpEntity class
+	  //					put these in:  request body, request header
+	  @SuppressWarnings({ "unchecked", "rawtypes" })
+	HttpEntity anEntity = new HttpEntity(aReservation, theHeader);
+	  
+	  // Call the API with the POST request to add reservation to the server
+	  // the API will return the Reservation object that was added to the server
+	  // Use the PostForObject method to issue a POST request with RestTemplate
+	  
+	  //														URL			request		class for returned object
+	  aReservation = restTemplate.postForObject(BASE_URL + "reservations", anEntity, Reservation.class);
+	  
+    return aReservation;
   }
 
   /**
@@ -53,6 +90,8 @@ public class HotelService {
     // TODO: Implement method
   }
 
+  /* DON'T MODIFY ANY METHODS BELOW */
+  /* DON'T MODIFY ANY METHODS BELOW */
   /* DON'T MODIFY ANY METHODS BELOW */
 
   /**
@@ -145,6 +184,7 @@ public class HotelService {
     return reservation;
   }
 
+  // Method will create a reservation object from a comma-delimited String
   private Reservation makeReservation(String CSV) {
     String[] parsed = CSV.split(",");
 
