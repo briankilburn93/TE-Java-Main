@@ -91,17 +91,13 @@ public class AppTest {
         public void listDetailsForAuctionShouldNotThrowNumberFormatException() {
                 // Arrange
                 initForScannerPurposes("what");
-                String url = "http://localhost:3000/auctions/what";
-
-                Mockito.when(mockRestTemplate.getForObject(Mockito.eq(url), Mockito.eq(Auction.class)))
-                                .thenThrow(new NumberFormatException());
                 app.restTemplate = mockRestTemplate;
 
                 // Act
                 Auction auction = app.listDetailsForAuction();
 
                 // Assert
-                Mockito.verify(mockRestTemplate, Mockito.times(1)).getForObject(ArgumentMatchers.anyString(),
+                Mockito.verify(mockRestTemplate, Mockito.never()).getForObject(ArgumentMatchers.anyString(),
                                 ArgumentMatchers.eq(Auction.class));
 
                 assertEquals(auction, null);
@@ -112,24 +108,6 @@ public class AppTest {
                 initForScannerPurposes("Zero");
                 mockHelper("http://localhost:3000/auctions?title_like=Zero");
                 assertArrayEquals(auctions, app.findAuctionsSearchTitle());
-        }
-
-        @Test
-        public void findAuctionsSearchTitleShouldNotThrowHttpClientErrorException() {
-                // Arrange
-                initForScannerPurposes("nope");
-                Mockito.when(mockRestTemplate.getForObject(Mockito.eq("http://localhost:3000/auctions?title_like=nope"),
-                                Mockito.eq(Auction[].class)))
-                                .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
-                app.restTemplate = mockRestTemplate;
-
-                // Act
-                Auction[] auctions = app.findAuctionsSearchTitle();
-
-                // Assert
-                Mockito.verify(mockRestTemplate, Mockito.times(1)).getForObject(ArgumentMatchers.anyString(),
-                                ArgumentMatchers.eq(Auction[].class));
-                assertArrayEquals(auctions, null);
         }
 
         @Test
@@ -146,16 +124,13 @@ public class AppTest {
         public void findAuctionsSearchPriceShouldNotThrowNumberFormatException() {
                 // Arrange
                 initForScannerPurposes("what");
-                Mockito.when(mockRestTemplate.getForObject(
-                                Mockito.eq("http://localhost:3000/auctions?currentBid_lte=what"),
-                                Mockito.eq(Auction[].class))).thenThrow(new NumberFormatException());
                 app.restTemplate = mockRestTemplate;
 
                 // Act
                 Auction[] auctions = app.findAuctionsSearchPrice();
 
                 // Assert
-                Mockito.verify(mockRestTemplate, Mockito.times(1)).getForObject(ArgumentMatchers.anyString(),
+                Mockito.verify(mockRestTemplate, Mockito.never()).getForObject(ArgumentMatchers.anyString(),
                                 ArgumentMatchers.eq(Auction[].class));
 
                 assertArrayEquals(auctions, null);
