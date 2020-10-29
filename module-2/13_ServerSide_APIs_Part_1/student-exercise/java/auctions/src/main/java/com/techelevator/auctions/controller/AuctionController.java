@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/auctions")
-public class AuctionController {
+@RequestMapping("/auctions")		//@RequestMapping is outside the controller class
+public class AuctionController {	// This is the base path for all controllers
 
     private AuctionDAO dao;
 
     public AuctionController() {
         this.dao = new MemoryAuctionDAO();
+    }
+    
+    @RequestMapping(path = "")	// handle the base path of /auction
+    public List<Auction> list() {
+    	
     }
 
 }
