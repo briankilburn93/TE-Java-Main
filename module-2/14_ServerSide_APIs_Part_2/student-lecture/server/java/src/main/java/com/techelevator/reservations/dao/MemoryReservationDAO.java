@@ -13,14 +13,15 @@ import com.techelevator.reservations.exception.ReservationNotFoundException;
 import com.techelevator.reservations.models.Hotel;
 import com.techelevator.reservations.models.Reservation;
 
-@Component
+@Component	// Tell Spring to dependency inject the parameters in the constructor
 public class MemoryReservationDAO implements ReservationDAO {
 
     private List<Reservation> reservations = new ArrayList<>();
-    private HotelDAO hotelDAO;
+    private HotelDAO hotelDAO;	// Define a reference to the DAO we are using to access data
 
+    // The ctr for this class needs a HotelDAO object to work - passed as a parameter
     public MemoryReservationDAO(HotelDAO hotelDAO) {
-        this.hotelDAO = hotelDAO;
+        this.hotelDAO = hotelDAO;	// Assigning the DAO object passed to our reference
         initializeReservationData();
     }
 
