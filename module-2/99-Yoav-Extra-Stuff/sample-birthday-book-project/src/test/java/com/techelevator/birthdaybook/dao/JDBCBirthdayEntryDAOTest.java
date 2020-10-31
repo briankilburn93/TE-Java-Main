@@ -58,7 +58,7 @@ public class JDBCBirthdayEntryDAOTest extends BaseTest {
 	}
 	
 	@Test
-	public void getEntries_withValidData_shouldMultupleRecords() throws Exception {
+	public void getEntries_withValidData_shouldReturnMultipleRecords() throws Exception {
 		
 		BirthdayEntry entry = getBirthdayEntry("Test", 1, 5, 1970, "Test note");
 		
@@ -87,6 +87,18 @@ public class JDBCBirthdayEntryDAOTest extends BaseTest {
 		
 		assertNotNull(result);
 		assertEquals(1999, result.getBirthYear().intValue());
+	}
+	
+	@Test(expected = EntryNotFoundException.class)
+	public void updateEntry_withInvalidRecord_shouldThrowEntryNotFoundException() throws Exception{
+		
+		BirthdayEntry entry = getBirthdayEntry("Test", 1, 5, 1970, "Test note");
+		
+		BirthdayEntry savedEntry = dao.create(entry);
+		
+		savedEntry.setId(savedEntry.getId() + 1);
+		savedEntry.setBirthYear(1999);
+		dao.updateEntry(savedEntry, savedEntry.getId() + 1);
 	}
 	
 	@Test(expected = EntryNotFoundException.class)
