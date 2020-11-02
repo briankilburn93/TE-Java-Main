@@ -7,10 +7,12 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Department;
 import com.techelevator.model.DepartmentDAO;
 
+@Component	// Tells Spring this is a component you might want to use
 public class JDBCDepartmentDAO implements DepartmentDAO {
 	
 	private JdbcTemplate jdbcTemplate;

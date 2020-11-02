@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.web.client.RestTemplate;
 
 import com.techelevator.api.review.client.model.Department;
 import com.techelevator.api.review.client.model.DepartmentDAO;
@@ -139,10 +140,22 @@ public class ProjectsCLI {
 			System.out.println("\n*** No results ***");
 		}
 	}
-
+/*This was the original
 	private void handleListAllDepartments() {
 		printHeading("All Departments");
 		List<Department> allDepartments = departmentDAO.getAllDepartments();
+		listDepartments(allDepartments);
+	}
+	*/
+	//This is the new/updated one
+	private void handleListAllDepartments() {
+		// Changed on 10/30/2020 to call api to get the data instead of database
+		printHeading("All Departments");
+		
+		//To get data from an API we will use a RestTemplate
+		RestTemplate apiCall = new RestTemplate();
+		List<Department> allDepartments = List<Department>();
+		allDepartments = apiCall.getForObject("http://localhost:8080/departments", List<Department>.class);
 		listDepartments(allDepartments);
 	}
 
