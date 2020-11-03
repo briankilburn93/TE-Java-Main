@@ -15,14 +15,33 @@ Begin transaction;  -- mark the start of the logical unit of work
 --
 -- Remove any existing objects from the database that this SQL creates
 --
+drop Table if exists users            cascade;
 drop Table if exists employee         cascade;
 drop Table if exists department       cascade;
 drop Table if exists project          cascade;
 drop Table if exists project_employee cascade;
 
+drop sequence if exists seq_user_id;
 drop sequence if exists seq_employee_id;
 drop sequence if exists seq_department_id;
 drop sequence if exists seq_project_id;
+
+--
+-- Create objects needed for login and authentication
+--
+CREATE SEQUENCE seq_user_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+
+
+CREATE TABLE users (
+	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
+	username varchar(50) NOT NULL,
+	password_hash varchar(200) NOT NULL,
+	CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
 
 --
 -- Define objects required for the employee table
@@ -73,6 +92,10 @@ CREATE TABLE project_employee (
 --
 -- populate all the tables
 --
+
+INSERT INTO users (username,password_hash) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC');
+INSERT INTO users (username,password_hash) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC');
+
 INSERT INTO department (name) VALUES ('Department of Redundancy Department');
 INSERT INTO department (name) VALUES ('Network Administration');
 INSERT INTO department (name) VALUES ('Research and Development');
