@@ -57,9 +57,17 @@ public class App {
                     }
                 } else if (menuSelection == 6) {
                     String credentials = consoleService.promptForLogin();
+                    // Be sure the credentials are exactly two Strings seperated by a comma
                     if( credentials.split(",").length == 2 ) {
+                    	// Use the authentication service provided to login the user
+                    	// This login method is expecting a String with username,password
+                    	// This login method returns ResponseEntity Map
+                    	// The Map contains various values related to the login
                         ResponseEntity<Map> response = authenticationService.login(credentials);
+                        // The response from the login method has a body...
                         if (response.hasBody()) {
+                        	// get the value from the Map with the key "token"
+                        	//	 which contains the JWT
                             String token = (String) response.getBody().get("token");
                             hotelService.AUTH_TOKEN = token;
                             System.out.println("Login Successful");

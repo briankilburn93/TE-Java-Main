@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.model.DepartmentDAO;
 import com.techelevator.model.Employee;
 import com.techelevator.model.EmployeeDAO;
 
-
+@RestController
 
 public class EmployeeController {
 	
@@ -28,6 +30,14 @@ private EmployeeDAO   employeeDAO;  // Define a reference to the EmployeeDAO
 	public List<Employee> allEmployees() {
 		logAPICall("GET-/employees");
 		return employeeDAO.getAllEmployees();
+	}
+	
+	@RequestMapping(path="/employees/namesearch", method=RequestMethod.GET)
+	public List<Employee> searchEmployee(@RequestParam (value="firstName") String firstNameSearch, @RequestParam (value="lastName") String lastNameSearch) {
+		
+		List <Employee> anEmployee = employeeDAO.searchEmployeesByName(firstNameSearch, lastNameSearch);
+		
+		return anEmployee;
 	}
 
 	public void logAPICall(String message) {

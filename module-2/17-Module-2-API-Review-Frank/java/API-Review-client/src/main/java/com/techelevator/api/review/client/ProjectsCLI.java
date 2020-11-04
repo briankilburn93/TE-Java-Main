@@ -295,7 +295,9 @@ public class ProjectsCLI {
 		printHeading("Employee Search");
 		String firstNameSearch = getUserInput("Enter first name to search for");
 		String lastNameSearch = getUserInput("Enter last name to search for");
-		List<Employee> employees = employeeDAO.searchEmployeesByName(firstNameSearch, lastNameSearch);
+		RestTemplate apiCall = new RestTemplate();	// I entered to define a resttemplate to make an API call
+		ResponseEntity<Employee> responseEntity = apiCall.getForEntity("http://localhost:8080/employees", Employee.class);
+		//List<Employee> employees = employeeDAO.searchEmployeesByName(firstNameSearch, lastNameSearch);
 		listEmployees(employees);
 	}
 

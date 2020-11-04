@@ -13,7 +13,8 @@ import java.util.Random;
 
 public class HotelService {
 
-  public static String AUTH_TOKEN = "";
+	// This is public, because it's set outside this class by the app login process
+  public static String AUTH_TOKEN = "";		// Hold the JWT for user login
   private final String INVALID_RESERVATION_MSG = "Invalid Reservation. Please enter the Hotel Id, Full Name, Checkin Date, Checkout Date and Guests";
   private final String BASE_URL;
   private final RestTemplate restTemplate = new RestTemplate();

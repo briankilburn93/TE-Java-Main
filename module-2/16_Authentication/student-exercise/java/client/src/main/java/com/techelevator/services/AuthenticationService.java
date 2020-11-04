@@ -1,5 +1,6 @@
 package com.techelevator.services;
 
+import com.techelevator.hotels.services.ConsoleService;
 import com.techelevator.models.LoginDTO;
 import org.springframework.http.*;
 import org.springframework.web.client.RestClientResponseException;
@@ -12,6 +13,7 @@ public class AuthenticationService {
 
     private String BASE_URL;
     private RestTemplate restTemplate = new RestTemplate();
+    private ConsoleService console = new ConsoleService();
 
     public AuthenticationService(String url) {
         this.BASE_URL = url;
@@ -24,7 +26,7 @@ public class AuthenticationService {
         HttpEntity<LoginDTO> entity = new HttpEntity<>(loginDTO, headers);
         ResponseEntity<Map> response = null;
         try {
-        	// send login request here
+        	response = restTemplate.exchange(BASE_URL + "/login", HttpMethod.POST, entity, Map.class);
         } catch(RestClientResponseException ex) {
             if (ex.getRawStatusCode() == 401 && ex.getResponseBodyAsString().length() == 0) {
                 String message = ex.getRawStatusCode() + " : {\"timestamp\":\"" + LocalDateTime.now() + "+00:00\",\"status\":401,\"error\":\"Invalid credentials\",\"message\":\"Login failed: Invalid username or password\",\"path\":\"/login\"}";

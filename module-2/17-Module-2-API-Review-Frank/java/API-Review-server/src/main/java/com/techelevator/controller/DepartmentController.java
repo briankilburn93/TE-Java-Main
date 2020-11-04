@@ -73,11 +73,6 @@ public Department addDepartment(@RequestBody Department aDepartment) {
 	logAPICall("POST-/departments " + aDepartment);
 	return deptDAO.createDepartment(aDepartment);
 }
-@RequestMapping(path="/employees", method=RequestMethod.GET)
-public List<Employee> allEmployees() {
-	logAPICall("GET-/employees");
-	return employeeDAO.getAllEmployees();
-}
 
 
 
