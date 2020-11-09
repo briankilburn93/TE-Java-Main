@@ -1,0 +1,67 @@
+<!DOCTYPE html>    <!-- DOCTYPE tells the browser this file contains HTML - optional -->
+<html lang="en">   <!-- Container for all html in the file - required - root of all html -->
+
+<head>  <!-- Contains information the browser and CSS mau need to know about this html -->
+    <meta charset="UTF-8"> <!-- meta tag information for the browser -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Code-Reservation - Day 1</title> <!-- Words displayed in the tab for the browser -->
+    
+    <!--  rel="type-of-resource", href="location of the resource" - href is usually a path/filename or URL -->
+    <link rel="stylesheet", href="styles.css"/> <!-- <link> connect to an external resource -->
+
+</head>
+
+<body> <!-- The primary content of the web page - most of your coding ge=oes here-->
+    <h1>Bits & Bytes</h1> <!-- heading tags h1, h2, h3 provide a simple way to put headings on a page-->
+    <p>The internet's best (non-Italian) restaurant!</p>  <!-- <p> is used to put words on the page -->
+
+    <nav> <!-- Navigation to other pages/resources-->
+          <!-- An anchor tag (<a>) is used for links to other resources from a page               --> 
+          <!-- the href= attibute specifies the URL of where you want to go                       -->
+          <!-- if the link tis to a resource in the same project - the project folder is the root -->
+          <a href="./index.html">View Menu</a> <!-- Provide a link to index displayed as "View Menu"-->
+
+    </nav>
+    <main> <!-- Documents or groups components for the main part usually for styling        -->
+        <h2>Reservation Form</h2>
+    <!-- Define a form to collect user input and send it to an api (someday)                -->
+    <!-- We are using a non-existing/dummy api for today as an example                      -->
+    <!-- We are doing a POST, because in the real world form data is sent                   -->
+    <!--     in the body of the request to protect it and it usually adds to a resource     -->
+    <!-- When the form is submitted, send the data in the form to action URL using a POST   -->
+    <form method="POST" action="http://someserver.api/reservations">
+        <!-- <input> tag is used to define all user interactions                             -->
+        <!--     the type= attribute of the input tag identifies the type ot interaction     -->
+        <!-- <label> tag associates a caption with an input tag                              -->
+        <div> <!-- group a set of html for styling - has no impact on display in browser     -->
+            <label for="reservationName">Name</label> <!-- words display in front of input box   -->
+            <input  id="reservationName" type="text"/><!-- id is the name of variable to hold data-->
+        </div>
+        <div>
+            <label for="numberOfGuests">How many people</label>
+            <input  id="numberOfGuests" type="number">
+        </div>
+        <div>
+            <label for="reservationDate">When are you coming</label>
+            <input  id="reservationDate" type="date"></input>
+        </div>
+        <div>
+            <label for="reservationTime">Arrival Time</label>
+            <input  id="reservationTime" type="time"></input>
+        </div>
+        <div>
+            <label for="specialOccasion">Special occasion?</label>
+            <input  id="specialOccasion" type="checkbox">
+        </div>
+        <div> <!-- This is the form submit button - causes the form to be sent to action URL -->
+            <input type="submit"/> <!-- define a submit button to the form-->
+        </div>
+    </form>
+    
+    
+    
+    
+    </main>
+
+</body>
+</html>
