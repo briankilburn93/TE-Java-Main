@@ -31,8 +31,11 @@
     <!-- When the form is submitted, send the data in the form to action URL using a POST   -->
     <form method="POST" action="https://5f02f3429e41230016d43346.mockapi.io/api/reservations">
         <!-- <label> tag associates a caption with an input tag                              -->
+        <!--     the for= attribute is the name of the control the label is associated with  -->
         <!-- <input> tag is used to define all user interactions                             -->
-        <!--     the type= attribute of the input tag identifies the type ot interaction     -->
+        <!--     the type= attribute of the input tag identifies the type of interaction     -->
+        <!--     the id= attribute identifies a name for the control for use in the html     -->
+        <!--               typically used in the for= of label to associate it with the label-->
         <!--     the name= attribute identifies the name of a variable to hold the value     -->
         <!--               the name is used by any program processing the data               --> 
         <!--               the name does NOT have to match the id=. but usually does         -->
@@ -42,8 +45,8 @@
                 <input  id="reservationName"type="text" name="reservationName"/>
             </div>
             <div> 
-                <label for="numberOfGuests">Number of guests</label>
-                <input  id="numberOfGuests" name="numberOfGuests" type="number"/>
+                <label for="howManyGuests">Number of guests</label>
+                <input  id="howManyGuests" name="numberOfGuests" type="number"/>
             </div>
             <div> 
                 <label for="reservationDate">Date:</label>
