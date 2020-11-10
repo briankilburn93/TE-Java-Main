@@ -29,30 +29,50 @@
     <!-- We are doing a POST, because in the real world form data is sent                   -->
     <!--     in the body of the request to protect it and it usually adds to a resource     -->
     <!-- When the form is submitted, send the data in the form to action URL using a POST   -->
-    <form method="POST" action="http://someserver.api/reservations">
+    <form method="POST" action="https://5f02f3429e41230016d43346.mockapi.io/api/reservations">
+        <!-- <label> tag associates a caption with an input tag                              -->
         <!-- <input> tag is used to define all user interactions                             -->
         <!--     the type= attribute of the input tag identifies the type ot interaction     -->
-        <!-- <label> tag associates a caption with an input tag                              -->
+        <!--     the name= attribute identifies the name of a variable to hold the value     -->
+        <!--               the name is used by any program processing the data               --> 
+        <!--               the name does NOT have to match the id=. but usually does         -->
         <div> <!-- group a set of html for styling - has no impact on display in browser     -->
-            <label for="reservationName">Name</label> <!-- words display in front of input box   -->
-            <input  id="reservationName" type="text"/><!-- id is the name of variable to hold data-->
-        </div>
-        <div>
-            <label for="numberOfGuests">How many people</label>
-            <input  id="numberOfGuests" type="number">
-        </div>
-        <div>
-            <label for="reservationDate">When are you coming</label>
-            <input  id="reservationDate" type="date"></input>
-        </div>
-        <div>
-            <label for="reservationTime">Arrival Time</label>
-            <input  id="reservationTime" type="time"></input>
-        </div>
-        <div>
-            <label for="specialOccasion">Special occasion?</label>
-            <input  id="specialOccasion" type="checkbox">
-        </div>
+            <div> 
+                <label for="reservationName">Name</label>
+                <input  id="reservationName"type="text" name="reservationName"/>
+            </div>
+            <div> 
+                <label for="numberOfGuests">Number of guests</label>
+                <input  id="numberOfGuests" name="numberOfGuests" type="number"/>
+            </div>
+            <div> 
+                <label for="reservationDate">Date:</label>
+                <input  id="reservationDate" name="reservationDate" type="date"/>
+            </div>
+            <div> 
+                <label for="reservationTime">Time</label>
+                <input  id="reservationTime" name="reservationTime" type="time"/>
+            </div>
+            <div> 
+                <label for="specialOccasion">Special Occasion?</label>
+                <input  id="specialOccasion" type="checkbox" name="specialOccasion"/>
+            </div>
+            <div>
+                <label for="occasion">Type of occassion?</label>
+                <select name="occasion" id="occasion"> <!-- Drop down list -->
+                    <option value="none">None</option> <!-- List options - value is what's returned when option is chosen-->
+                    <option value="bday">Birthday</option>
+                    <option value="anniv">Anniversary</option>
+                    <option value="nuptuals">Marriage</option>
+                    <option value="divorce">Divorce</option>
+                    <option value="birth">Baby born!</option>
+                    <option value="pregnant">We're having a baby!</option>
+                    <option value="grad">Graduation</option>
+                    <option value="other">Other</option>
+                  </select>
+            </div>
+        <!-- We need to define a submit button to have the user input sent to the API        -->
+        <!--            using the http request and url in the form tag                       -->
         <div> <!-- This is the form submit button - causes the form to be sent to action URL -->
             <input type="submit"/> <!-- define a submit button to the form-->
         </div>
