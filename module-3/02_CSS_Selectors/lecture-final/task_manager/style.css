@@ -11,7 +11,7 @@ user-select: none;
 body {
     /* force a horizontal scroll bar */
     white-space: nowrap; /* do not wrapt the screen content */
-    background-image: linear-gradient(to bottom #858c90 #BBB); /* make scroll bar have a gradient color */
+    background-image: linear-gradient(to bottom, #858c90, #BBB); /* make scroll bar have a gradient color */
     background-repeat: no-repeat; /* don't repeat the background */
     background-attachment: fixed;
     font-family: 'Raleway', sans-serif;
@@ -28,7 +28,7 @@ header > h1, header > p {  /* style the header element's child h1-tags and heade
     height: 20px;
     vertical-align: middle; /* align content to middle of it's block */
     padding-right: 20px;
-    color: rgba(255, 255, 255, .8); /* red green blue opacity (opacity goes from 0.0 fully transparent to 1.0 fully opaque)
+    color: rgba(255, 255, 255, .8); /* red green blue opacity (opacity goes from 0.0 fully transparent to 1.0 fully opaque) */
     border-right: 1px solid rgba(255, 255, 255, .5);  /* put the vertical bar between the entries */
 }
 header > h1 {
