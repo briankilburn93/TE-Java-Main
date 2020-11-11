@@ -50,3 +50,17 @@ header img {
 #student-picture img{
     border-radius: 50%;
 }
+
+
+/* Add responsive styling to the page */
+
+@media screen and (max-width: 450px) {
+    main {
+        grid-template-areas: 
+        "main-grid"
+        "experience-grid"
+        ;
+
+        grid-template-columns: 1fr; /* refine the grid to 1 column */
+    }
+}

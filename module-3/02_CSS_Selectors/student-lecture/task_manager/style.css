@@ -77,3 +77,27 @@ div.trello-list li:hover { /* style when the cursor hovers on an item - pseudo c
     background-color: rgba(9,45,66,.1);
 
 }
+
+
+
+
+
+/* 
+* {
+    box-sizing: border-box;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: rgba(192, 192, 192, 0.1);
+}
+
+ul {
+    margin: 0;
+    margin: 0;
+}
+*/

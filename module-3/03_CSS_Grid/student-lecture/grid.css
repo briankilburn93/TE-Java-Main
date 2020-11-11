@@ -1,0 +1,63 @@
+.container {
+    display: grid;
+   
+   /* grid-template-columns: 200px 1fr 200px; equal size on left and right, and divide rest into 1 fractional unit in the middle */
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: 
+    "header header header" /* assign header to all columns in first row */
+    "menu-nav main upcoming-events" /* assign different names to each column in the second row */
+    "footer footer footer" /* assign all column in third row to name footer */
+    ;
+
+    grid-gap: 10px;
+}
+
+    header {
+        grid-area: header;
+    }
+
+    nav#menu-nav { /* style the name with id="menu-nav" */
+        grid-area: menu-nav; /* assign the element to the grid area named menu-nav */
+    }
+
+    main {
+        grid-area: main;
+    }
+
+    aside {
+        grid-area: upcoming-events;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+
+    /* Add responsive styling to the page */
+
+    @media screen and (max-width: 768px) {
+        .container {
+            grid-template-areas: 
+            "header"
+            "menu-nav"
+            "main"
+            "upcoming-events"
+            "footer"
+            ;
+
+            grid-template-columns: 1fr; /* refine the grid to 1 column */
+        }
+    }
+
+        /* Add responsive styling to the page */
+
+        @media screen and (max-width: 200px) {
+            .container {
+                grid-template-areas: 
+                "header"
+                "menu-nav"
+                "main"
+                ;
+    
+                grid-template-columns: 1fr; /* refine the grid to 1 column */
+            }
+        }
