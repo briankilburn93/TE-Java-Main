@@ -1,0 +1,14 @@
+body {  
+    font-family : Arial, Helvetica, sans-serif; 
+    background-color: gray;
+    position: absolute;
+}
+
+h2 {
+    font-size: 32px;
+    margin: 10px;
+}
+
+div {
+    margin: 5px;
+}

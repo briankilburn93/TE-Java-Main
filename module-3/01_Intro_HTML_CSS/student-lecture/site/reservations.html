@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Code Day 1</title>
+
+    <link rel="stylesheet", href="styles.css"/>
+</head>
+
+<body>
+    <h1>Bits & Bytes</h1>
+    <p>Welcome to the internet's best restaurant!</p>
+
+    <nav>
+         <a href="./index.html"/>View menu</a>
+    </nav>
+
+    <main>
+        <h2>Reservation Form</h2>
+<!-- Define a form to collect user input and send it to an api (not today, but one day)-->
+<!-- When the form is submitted, send the data in the form to the URL with the data in the body using a POST-->
+        <form method="POST", action="http://dummyserver.api/reservations">
+
+        <!-- <input> tag is used to define all user interactions, type= identifies the type of interaction-->
+
+        <div> <!-- group a set of html for styling - has no impact on display in browser-->
+            <label for="reservationName">Name:</label>
+            <input id="reservationName" type="text"> <!-- id is the name of the variable, type is type-->
+        </div>
+
+        <div>
+            <label for="numberOfGuests">How many people:</label>
+            <input id="numberOfGuests" type="number">
+        </div>
+        
+        <div>
+            <label for="reservationDate">When are you coming:</label>
+            <input id="reservationDate" type="date">
+        </div>
+
+        <div>
+            <label for="reservationTime">Arrival Time:</label>
+            <input id="reservationTime" type="time">
+        </div>
+
+        <div>
+            <label for="specialOccasion">Special occasion?</label>
+            <input id="specialOccasion" type="checkbox">
+        </div>
+
+<div> <!-- This is the form submit button-->
+    <input type="submit"> <!-- define a submit button to the form-->
+</div>
+        </form>
+    </main>
+    </body>
+    </html>

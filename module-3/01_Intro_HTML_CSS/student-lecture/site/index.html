@@ -1,0 +1,49 @@
+<!DOCTYPE html> <!--DOCTYPE tells the browser this file contains HTML - optional-->
+<html lang="en"> <!--Container for all html in the file - required - root of all html-->
+
+<head> <!--Contains information the browser and CSS may need to know about this html-->
+    <meta charset="UTF-8"> <!--meta tag information for the browser-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Code Day 1</title> <!--Words displayed in the tab for the browser window-->
+
+    <!--  rel= type-of-resource,href= location of the resource - href is usually a path/filename or URL-->
+    <link rel="stylesheet", href="styles.css"/> <!-- link tag allows us to connect to an external resource-->
+</head>
+
+<body> <!-- The primary content fo the web page - most of your coding goes here-->
+    <h1>Bits & Bytes</h1> <!-- heading tags h1, h2, h3 provide a simple way to put headings on a page-->
+    <p>Welcome to the internet's best restaurant!</p> <!-- is used to put words on the page in a paragraph-->
+    <nav> <!-- Navigation to other pages/resources-->
+            <!-- (<a>) anchor tag is used for links to other resources from a page-->
+            <!-- if the linked to a resource in the same project, the project folder is the root-->
+         <a href="./reservations.html"/>Make a reservation</a>     
+    </nav>
+
+
+    <main> <!-- documents/groups the main part of the page - use CSS to style all the elements as a group-->
+           <!--main has no impact on how the page is displayed-->
+        <h2>Menu</h2>
+
+        <section> <!-- document/group a logical part/section of a web page for styling with CSS - no impact on display-->
+            <h3>Lunch</h3>
+            <p>Full stack sandwich</p>
+            <img src="images/menu/lunch/full-stack-sandwich.png"/>
+
+            <p>Universal Serial Burger</p>
+            <img src="images/menu/lunch/USBurger.png"/>
+
+        </section>
+        <section>
+            <h3>Dinner</h3>
+            <p>Rack of RAM</p>
+            <img src="images/menu/dinner/rack-of-ram.png"/>
+
+            <p>Vegetable Array</p>
+            <img src="images/menu/dinner/array-of-vegetables.png"/>
+
+        </section>
+    </main>
+
+</body>
+
+</html> <!--Marks the end of html container - all components have start-tag and end-tag-->

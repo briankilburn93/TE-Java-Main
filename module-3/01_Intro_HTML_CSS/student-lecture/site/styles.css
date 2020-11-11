@@ -1,0 +1,22 @@
+/* CSS - Cascading Style Sheet aka "stylesheet" - Make the web page pretty */
+
+/* General syntax: 
+selector : { 
+    attribute: value;
+} 
+   note: selector might be a tag name
+*/
+
+/* We want to style everything in the <body> in html */
+body {
+    font-family : Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size : 32px;
+    color : rgb(36, 99, 199);
+}
+
+img { /* We set all img tags*/
+    height: 200px;
+}

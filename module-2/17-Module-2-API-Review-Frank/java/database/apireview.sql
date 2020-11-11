@@ -25,7 +25,6 @@ drop sequence if exists seq_user_id;
 drop sequence if exists seq_employee_id;
 drop sequence if exists seq_department_id;
 drop sequence if exists seq_project_id;
-
 --
 -- Create objects needed for login and authentication
 --

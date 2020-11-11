@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Form Exercise</title>
+    <link rel="stylesheet", href="styles.css"/>
+</head>
+<body>
+
+    <main> 
+        <h2>Exercise Form</h2>
+
+    <form method="POST" action="https://fakeApi.io/api/reservations">
+
+        <div> 
+            <div> 
+                <label for="name">Name:</label>
+                <input  id="name"type="text" name="name" required/>
+            </div>
+            <div> 
+                <label for="email">Email:</label>
+                <input  id="email"type="text" name="email" required/>
+            </div>
+            <div> 
+                <label for="dateOfBirth">Date of birth:</label>
+                <input  id="dateOfBirth" name="dateOfBirth" type="date"/>
+            </div>
+            <div> 
+                <label for="color">Favorite color:</label>
+                <input  id="color" name="color" type="color"/>
+            </div>
+            <div> 
+                <label for="howManyGuests">Favorite Number:</label>
+                <input  id="howManyGuests" name="favoriteNumber" type="number"/>
+            </div>
+            <div> 
+                <label for="specialOccasion">Confirm Data is correct:</label>
+                <input  id="specialOccasion" type="checkbox" name="confirmData"/>
+            </div>
+        </div>
+
+        <div> 
+            <input type="submit"/> 
+        </div>
+    </form>
+    
+    
+    
+    
+    </main>
+    
+</body>
+</html>
