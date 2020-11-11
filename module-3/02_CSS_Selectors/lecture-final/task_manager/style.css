@@ -1,0 +1,130 @@
+html { /* style everything in the html tag */
+   height: 100%;    /* all elements should fill 100% of their box */
+   font-size: 16px; /* all font sizes should be 16px */
+}
+
+* { /* style all elements in the file      */
+box-sizing: border-box; /* make the width and height relative to border of the box */
+user-select: none;
+}
+
+body {
+    /* force a horizontal scroll bar */
+    white-space: nowrap; /* do not wrapt the screen content */
+    background-image: linear-gradient(to bottom, #858c90, #BBB); /* make scroll bar have a gradient color */
+    background-repeat: no-repeat; /* don't repeat the background */
+    background-attachment: fixed;
+    font-family: 'Raleway', sans-serif;
+    background-color: gray;
+}
+
+header {  /* style all elements in header */
+    position: fixed; /* Don't let the header scroll */
+    top: 0;          /* Place the header at the very top of the viewport (screen) */
+    height: 50px;    /* header to be this high                                    */
+}
+header > h1, header > p {  /* style the header element's child h1-tags and header element's child p-tags  */
+    display: inline-block; /* change the display style so they will be next to each other                 */
+    height: 20px;
+    vertical-align: middle; /* align content to middle of it's block */
+    padding-right: 20px;
+    color: rgba(255, 255, 255, .8); /* red green blue opacity (opacity goes from 0.0 fully transparent to 1.0 fully opaque) */
+    border-right: 1px solid rgba(255, 255, 255, .5);  /* put the vertical bar between the entries */
+}
+header > h1 {
+    text-transform: uppercase; /* display the content in uppercase */
+    font-size: 1.1rem;
+}
+header > p {
+    font-size: .9rem;
+    padding-left: 5px;
+}
+main {
+   margin-top: 50px; /* start the main content right after the header (which is 50px high) */
+}
+div.trello-list {  /* style all div's with the class trello-list (. indicates a class name) */
+    display: inline-block; /* have the trello-list elements go across the screen */
+    width: 300px;
+    margin-right: 10px;
+    vertical-align: top;
+    background-color: #DDD;
+    border-radius: 2px 3px;
+}
+div.trello-list h2 { /* style the h2 in the divs with class trello-list */
+    margin: 8px;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+div.trello-list ol {
+    margin: 0px;
+    padding: 0px;
+}
+div.trello-list li {
+    list-style: none; /* don't display the number of each list item */
+    background-color: rgb(255,255,255); /* Set the background color to white */
+    font-size: .9rem;
+    border-radius: 1px;
+    margin-bottom: 10px;
+    padding: 8px;
+    white-space: normal;
+    ;
+}
+div.trello-list li:last-child { /* style the last item in the ordered list */
+    margin-bottom: 0px;
+}
+
+div.trello-list li:hover { /* style when the cursor hovers on an list item - pseudo class li:hover */
+background-color: rgba(9, 45, 66, .1);
+color: #092d42;
+}
+div.trello-list a {   /* style the anchor link to add a card */
+    display: block;             /* change display from inline-block to block  */
+    text-decoration: none;      /* remove any list indicators                 */
+    color: #888;
+    padding: 8px 0px, 8px, 5px; /* top right bottom left                      */
+    font-size: .85rem;          /* make the font a little smaller             */
+} 
+
+
+div.trello-list a:hover { /* style when the cursor hovers on an anchor link item - pseudo class :hover */
+    background-color: rgba(9, 45, 66, .1);
+    }
+
+.labels span { /* style the <span> tag in all elements with the class labels    */
+    display: inline-block; /* change display so they stack on top of each other */
+    vertical-align: top;   /* align to the top of their box                     */
+    width: 35px;
+    height: 8px;
+    border-radius: 3px;    /* slightly rounded edges                           */
+}
+.label.pathway { /* style elements with the class "label pathway" Note: . in place of space       */
+    background-color: red;
+}
+.label.individual { /* style elements with the class "label individual" Note: . in place of space */
+    background-color: green;
+}
+.label.pair { /* style elements with the class "label pair" Note: . in place of space             */
+    background-color: teal;
+}
+.label.general { /* style elements with the class "label general" Note: . in place of space       */
+    background-color:orange;
+}
+
+
+/* Scrollbar */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #BBB;    
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+body::webkit-scrollbar-thumb:hover {
+    background: #888;    
+}
