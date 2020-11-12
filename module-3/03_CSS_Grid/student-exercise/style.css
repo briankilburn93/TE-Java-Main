@@ -52,15 +52,138 @@ header img {
 }
 
 
-/* Add responsive styling to the page */
 
-@media screen and (max-width: 450px) {
-    main {
-        grid-template-areas: 
-        "main-grid"
+#main-grid { 
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr; /* Define the columns in the grid                                */
+    grid-template-areas:                /* assign names to the columns and which grid area they apply to */
+    "header    header    picture" 
+    "quote     quote     picture" 
+    "profile   profile   contact" 
+    "experience-grid    experience-grid    experience-grid"
+    ;
+    
+    grid-row-gap: 20px;
+    grid-column-gap: 50px;
+    align-items: center;
+}
+
+#experience-grid {
+    grid-area: experience-grid;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr; /* Define the columns in the grid                                */
+    grid-template-areas:                /* assign names to the columns and which grid area they apply to */
+    "topFooter     topFooter"
+    "middleFooter    middleFooter"
+    "leftFooter       rightFooter"
+    ;
+
+    grid-row-gap: 20px;
+    grid-column-gap: 50px;
+}
+
+div#student-picture {
+    grid-area: picture;
+    text-align: center;
+    text-align: center;
+}
+
+div#student-contact {
+    grid-area: contact;
+    align-items: center;
+    text-align: center;
+}
+
+h1#headline {
+    grid-area: header;
+}
+
+div#student-quote {
+    grid-area: quote;
+}
+
+#student-profile {
+    grid-area: profile;
+}
+
+div#experience-code {
+    grid-area: topFooter;
+}
+
+div#experience-database {
+    grid-area: middleFooter;
+}
+
+div#experience-web {
+    grid-area: leftFooter;
+}
+
+div#experience-design {
+    grid-area: rightFooter;
+}
+
+
+@media screen and  (max-width: 1024px) { /* apply this styling to screens with max width of 768px */
+    #main-grid { /* style the content of the page for smaller screen */
+        column-gap: 35px;
+        grid-template-areas :   /* redefine the grid rows */
+        "header    picture" 
+        "quote     contact" 
+        "profile   profile" 
+        "experience-grid    experience-grid"
+        ;
+        grid-template-columns : 1fr 1fr; /* refine the grid to 1 column */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #experience-grid {
+        grid-area: experience-grid;
+        display: grid;
+    
+        grid-template-columns: 1fr 1fr; /* Define the columns in the grid                                */
+        grid-template-areas:                /* assign names to the columns and which grid area they apply to */
+        "topFooter     leftFooter"
+        "middleFooter       rightFooter"
+        ;
+    
+        grid-row-gap: 20px;
+        grid-column-gap: 50px;
+    }
+}
+
+
+@media screen and  (max-width: 450px) { /* apply this styling to screens with max width of 768px */
+    #main-grid { /* style the content of the page for smaller screen */
+        column-gap: 35px;
+        grid-template-areas :   /* redefine the grid rows */
+        "header" 
+        "picture"
+        "contact" 
+        "quote"
+        "profile" 
         "experience-grid"
         ;
+        grid-template-columns : 1fr; /* refine the grid to 1 column */
+    }
+}
 
-        grid-template-columns: 1fr; /* refine the grid to 1 column */
+@media screen and (max-width: 450px) {
+    #experience-grid {
+        grid-area: experience-grid;
+        display: grid;
+    
+        grid-template-columns: 1fr; /* Define the columns in the grid                                */
+        grid-template-areas:                /* assign names to the columns and which grid area they apply to */
+        "topFooter"
+        "leftFooter"
+        "middleFooter"
+        "rightFooter"
+        ;
+    
+        grid-row-gap: 20px;
+        grid-column-gap: 50px;
     }
 }
