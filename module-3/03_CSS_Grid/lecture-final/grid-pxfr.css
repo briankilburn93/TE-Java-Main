@@ -1,11 +1,14 @@
 .container { /* style the content of the page */
     display: grid;   /* tell the browser we want to make a grid  */
 
-    /* Alternate to specifying all fractional units 
+    /* Using a combination of other units of measure (px, %) with fractional units          */
+    /*       the browser will determine width of the fractional unit columns based on       */
+    /*       the space left in viewscreen after allocating space for the non-fr columns     */
+    /* Define 3-column grid where left and right columns are the same size                  */
+    /*        and middle column is whatever space is remains between the left/right columns */
     grid-template-columns: 200px 1fr 200px ; /* Define the columns in the grid */
                                              /* equal size on left and right and divide what's left into 1fr */
 
-    grid-template-columns: 1fr 3fr 1fr; /* Define the columns in the grid */
     grid-template-areas:                /* assign names to the columns and which grid area they apply to */
     "header    header  header"          /* assign the name header to all the columns in the first row    */
     "menu-nav  main    upcoming-events" /* assign different names to each column in the second row       */
@@ -44,5 +47,3 @@ footer {  /* style the footer element */
         grid-template-columns : 1fr; /* refine the grid to 1 column */
     }
 }
-
-
