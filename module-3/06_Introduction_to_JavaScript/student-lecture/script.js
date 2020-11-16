@@ -10,8 +10,21 @@
  */
 function variables() {
   // Declares a variable where the value cannot be changed
+  const numDaysInWeek = 7;
+  console.log("There are " + numDaysInWeek + " days in a week");
+
+  console.log(`There are ${numDaysInWeek} days in a week`);
+
   // Declares a variable those value can be changed
+  let numDaysInMonth = 30;
+
+  console.log(`There are ${numDaysInMonth} days in a month`)
   // Declares a variable that will always be an array
+ const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+ console.log(weekdays);
+
+ console.table(weekdays);
 }
 
 /**
@@ -70,14 +83,31 @@ function objects() {
       "Milton Waddams",
       "Samir Nagheenanajar",
       "Michael Bolton"
-    ]
+    ],
+     // define a toString Function
+     toString : function() {
+    return `this.${this.lastName}, ${this.firstName}, ${this.age}`}
+
   };
 
+
   // Log the object
+  console.log(person);
+  console.table(person);
+  console.log(`Display using console.log: ${person}`);
+  console.table(`Display using console.log: ${person}`);
 
   // Log the first and last name
+  console.log(`${person.firstName}`);
 
   // Log each employee
+for (let i=0; i < person.employees.length; i++) {
+  console.log(`Employee #${i+1} is ${person.employees[i]}`);
+}
+
+// We can execute/run and function in the object using object.function()
+console.log(person.toString());
+
 }
 
 /*
@@ -128,6 +158,8 @@ function stringFunctions(value) {
   console.log(`.endsWith('World') - ${value.endsWith("World")}`);
   console.log(`.startsWith('Hello') - ${value.startsWith("Hello")}`);
   console.log(`.indexOf('Hello') - ${value.indexOf("Hello")}`);
+  console.log(`.indexOf('l') - ${value.indexOf("l")}`);            // First occurrence of the String
+  console.log(`.lastIndexOf('l') - ${value.lastIndexOf("l")}`);    // Last occurrence of the String
 
   /*
     Other Methods
@@ -138,4 +170,32 @@ function stringFunctions(value) {
         - trim()
         - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
     */
+}
+
+function arrayFunctions() {
+  let stooges = ["Moe", "Larry", "Curly"];
+  console.table(stooges);
+
+  stooges.push("Shemp");  // add an element to the end of the array
+  console.table(stooges);
+
+  stooges.unshift("Curly Joe"); // add an element to the start of the array
+  console.table(stooges);
+
+  stooges.splice(3,0,"Groucho","Chico","Harpo");  // insert elements starting at index 3 and delete 0 elements
+  console.table(stooges);
+
+  stooges.splice(3,1);
+  console.table(stooges); // delete 1 element starting at element 3
+
+  stooges.shift(); // remove one element from the start of the array
+  console.table(stooges);
+
+  stooges.pop();
+  console.table(stooges); // remove one element from the end of the array
+
+  let marxBros = ["Groucho", "Chico", "Harpo"];
+
+  let oldFunnyGuys = stooges.concat(marxBros);
+  console.table(oldFunnyGuys);
 }
