@@ -112,3 +112,27 @@ function sumAllNumbers(numbersToSum) {
  *   multiples of 3
  */
 function allDivisibleByThree(numbersToFilter) {}
+
+
+/**
+ * This example was added by Frank at the last minute and has no test.
+ * Give the browser the html and use the inspect to to run it
+ * 
+ * The map function will return an array created from the elements passed to it
+ * 
+ * @param - None
+ * @returns {arrray created from values passed to it}
+ */
+
+function mapArrayFunctionExampleFromBook() {
+let numbersToSquare = [1, 2, 3, 4];
+console.log(`Array calling map to create new array with values squared: `)
+console.table(numbersToSquare);
+
+let squaredNumbers = numbersToSquare.map( (number) => {
+    return number * number;
+});
+
+console.log(`Array returned from map with values in passed array squared: `)
+console.table(squaredNumbers);
+}
