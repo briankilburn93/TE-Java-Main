@@ -27,6 +27,9 @@ function printToConsole(value) {
  * @param {number} firstParameter the first parameter to multiply
  * @param {number} secondParameter the second parameter to multiply
  */
+function multiplyTogether(firstParameter, secondParameter) {
+  return firstParameter * secondParameter;
+}
 
 /**
  * This version makes sure that no parameters are ever missing. If
@@ -38,7 +41,12 @@ function printToConsole(value) {
  * @param {number} [firstParameter=0] the first parameter to multiply
  * @param {number} [secondParameter=0] the second parameter to multiply
  */
-
+function multiplyNoUndefined(firstParameter=0, secondParameter=0) {
+  console.log(`1st parm: ${firstParameter}`);
+  console.log(`1st parm: ${firstParameter}`);
+  console.log(`2nd parm: ${secondParameter}`);
+  return firstParameter * secondParameter;
+}
 
  
 /**
@@ -52,7 +60,7 @@ function printToConsole(value) {
  * @param {number} secondParameter the second parameter
  */
 function returnBeforeEnd(firstParameter, secondParameter) {
-  console.log("This will always fire.");
+  console.log("This will always execute.");
 
   if (firstParameter == 0) {
     console.log("Returning secondParameter times two.");
