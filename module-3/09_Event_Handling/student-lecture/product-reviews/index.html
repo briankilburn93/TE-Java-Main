@@ -16,6 +16,7 @@
 
         <h2 id="page-title">Product Reviews for <span class="name"></span></h2>
         <p class="description"></p>
+        <!-------------- d-none is a bootstrap class class - says don't display this element-------------->
         <input id="inputDesc" class="d-none form-control form-control-lg" type="text"/>
         <div class="clearfix"></div>
 
@@ -24,7 +25,7 @@
         </div>
 
         <div class="clearfix"></div>
-        
+                    <!-------------- form for entering a review - initially it is not displayed using d-none bootstrap class-------------->
         <form class="d-none">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -54,7 +55,9 @@
             <div class="clearfix"></div>
             <hr>
         </form>
-
+<!-- Following is template which may be used to add elements to the DOM -->
+<!-- Instead of adding each element one at a time, we can add the template -->
+<!-- and simply place data in the elements -->
         <template id="review-template">
             <div class="review">
                 <h4></h4>
