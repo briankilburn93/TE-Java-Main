@@ -1,4 +1,4 @@
-# Week 10 Review Pair Exercise
+# Week 10 Review Group Exercise
 
 ## Context
 
