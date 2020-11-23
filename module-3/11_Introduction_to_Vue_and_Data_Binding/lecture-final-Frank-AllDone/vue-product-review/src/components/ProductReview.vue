@@ -56,6 +56,14 @@
         </div>
         <h3>{{ aReview.title }}</h3>
         <p>{{aReview.review}}</p>
+        <!-- Add a checkbox connected to the favorited property in the reviews array   -->
+        <!-- v-model creates two-way binding between the screen and JavaScript code    --> 
+        
+        <p>
+        Favorite?
+        <input type="checkbox" v-model="aReview.favorited" />
+        </p>
+
         </div>
     </div>
 </template>
