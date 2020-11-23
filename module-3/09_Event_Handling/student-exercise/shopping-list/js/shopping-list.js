@@ -37,5 +37,57 @@ function displayGroceries() {
   });
 }
 
-setPageTitle();
-displayGroceries();
+const btnToggleAll = document.getElementById('toggleAll');
+
+function complete(item) {
+  if(!item.classList.contains('completed')) {
+    item.classList.add('completed');
+    item.querySelector('i').classList.add('completed');
+  }
+  allItemsIncomplete = false;
+}
+
+function incomplete(item) {
+  if(item.classList.contains('completed')) {
+    item.classList.remove('completed');
+    item.querySelector('i').classList.remove('completed');
+  }
+}
+
+function toggleAll(items, event) {
+  if(allItemsIncomplete) {
+    items.forEach((item) => {
+      complete(item);
+    })
+    document.getElementById('toggleAll').innerText = 'MARK ALL INCOMPLETE';
+  }
+  else if(!allItemsIncomplete) {
+    items.forEach((item) => {
+      incomplete(item)
+      allItemsIncomplete = true;
+    })
+    document.getElementById('toggleAll').innerText = 'MARK ALL COMPLETE';
+  }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  setPageTitle();
+  displayGroceries();
+
+  const items = document.querySelectorAll('li');
+  items.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      complete(event.target);
+    });
+
+    item.addEventListener('dblclick', (event) => {
+      incomplete(event.target);
+    });
+  });
+
+  btnToggleAll.addEventListener('click', (event) => {
+    toggleAll(items, event.currentTarget);
+  })
+  });
