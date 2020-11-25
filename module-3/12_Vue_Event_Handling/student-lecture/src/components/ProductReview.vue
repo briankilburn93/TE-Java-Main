@@ -6,32 +6,37 @@
 
     <div class="well-display">
       <div class="well">
-        <span class="amount">{{ averageRating }}</span>
+        <!-- if AverageRating is clicked, set the filter to value that is not a valid rating -->
+        <!-- so all reviews will be displayed -->
+        <span class="amount" v-on:click="filter=0">{{ averageRating }}</span>
         Average Rating
       </div>
 
       <div class="well">
-        <span class="amount">{{ numberOfOneStarReviews }}</span>
+        <!-- add an event to the span so it's clickable -->
+        <!-- when clicked, we will set a variable to the number of stars for the review -->
+        <!-- that variable will be used to filter the ratings displayed -->
+        <span class="amount" v-on:click="filter=1">{{ numberOfOneStarReviews }}</span>
         1 Star Review{{ numberOfOneStarReviews === 1 ? '' : 's' }}
       </div>
 
       <div class="well">
-        <span class="amount">{{ numberOfTwoStarReviews }}</span>
+        <span class="amount" v-on:click="filter=2">{{ numberOfTwoStarReviews }}</span>
         2 Star Review{{ numberOfTwoStarReviews === 1 ? '' : 's' }}
       </div>
 
       <div class="well">
-        <span class="amount">{{ numberOfThreeStarReviews }}</span>
+        <span class="amount" v-on:click="filter=3">{{ numberOfThreeStarReviews }}</span>
         3 Star Review{{ numberOfThreeStarReviews === 1 ? '' : 's' }}
       </div>
 
       <div class="well">
-        <span class="amount">{{ numberOfFourStarReviews }}</span>
+        <span class="amount" v-on:click="filter=4">{{ numberOfFourStarReviews }}</span>
         4 Star Review{{ numberOfFourStarReviews === 1 ? '' : 's' }}
       </div>
 
       <div class="well">
-        <span class="amount">{{ numberOfFiveStarReviews }}</span>
+        <span class="amount" v-on:click="filter=5">{{ numberOfFiveStarReviews }}</span>
         5 Star Review{{ numberOfFiveStarReviews === 1 ? '' : 's' }}
       </div>
     </div>
@@ -70,10 +75,18 @@
       <button v-on:click.prevent="resetForm" type="cancel">Cancel</button>
     </form>
 
+    <!-- Generate one of the following div for each element in
+    array returned by the filterReviews function(in computed)
+    Add a v-for to the div to loop through the reviews array
+    v-for required a v-bind to assign a variable in order to keep track
+    of where each array element appears on the screen
+    add the class favorited to the div when review.favorited is true
+    using v-bind:class={classname:variable} -->
+
     <div
       class="review"
       v-bind:class="{ favorited: review.favorited }"
-      v-for="review in reviews"
+      v-for="review in filterReviews"
       v-bind:key="review.id"
     >
       <h4>{{ review.reviewer }}</h4>
@@ -106,7 +119,8 @@ export default {
       name: "Cigar Parties for Dummies",
       description:
         "Host and plan the perfect cigar party for all of your squirrelly friends.",
-      showForm: false,
+      showForm: false,    // control whether or not the form for a new review is displayed
+      filter: 0,          // Used to filter the ratings that are displayed
       newReview: {},
       reviews: [
         {
@@ -149,7 +163,7 @@ export default {
       let sum = this.reviews.reduce((currentSum, review) => {
         return currentSum + review.rating;
       }, 0);
-      return sum / this.reviews.length;
+      return (sum / this.reviews.length).toFixed(2);        // .toFixed(#) to round to # decimal places
     },
     numberOfOneStarReviews() {
       return this.numberOfReviews(this.reviews, 1);
@@ -165,7 +179,16 @@ export default {
     },
     numberOfFiveStarReviews() {
       return this.numberOfReviews(this.reviews, 5);
-    }
+    },
+    filterReviews() {         // Filter reviews based on the value in the variable filter
+    // use an anon-func with filter to get element - send each element one at a time
+    //    .filter return true if the element its given should be result, false if not
+      return this.reviews.filter((aReview) => {
+        // return true if         rating === filter or  false if not
+        return aReview.rating === this.filter || this.filter === 0;   
+        // alternate: if(aReview.rating === filter) { return true; else return false;}
+      })
+      }
   },
   methods: {
     numberOfReviews(reviews, starType) {
