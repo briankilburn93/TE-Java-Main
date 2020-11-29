@@ -42,7 +42,7 @@ export default new Vuex.Store({
         favorited: false
       }
     ],
-  },
+  },    // end of state object
   mutations: {
     ADD_REVIEW(state, review) {
       state.reviews.unshift(review);
@@ -58,5 +58,6 @@ export default new Vuex.Store({
   },
   modules: {
   },
-  strict: true
+  strict: true    // should the rule about only mutations can change data in the data store be enforced
+  //                    true means mutations: are the only mutations allowed, while false means everything is public and likely not a good idea
 })

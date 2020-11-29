@@ -14,9 +14,12 @@
     <p>{{ review.review }}</p>
     <p>
       Favorite?
+      <!-- When the Favorite box is checked, run the event handler to change the favorited -->
+      <!-- property for the review the box was associated with -->
       <input
         type="checkbox"
         v-bind:checked="review.favorited"
+        v-on:change="onFavoritedChange(review)"
       />
     </p>
   </div>
@@ -27,8 +30,9 @@ export default {
   name: "review-display",
   props: ["review"],
   methods: {
-    onFavoritedChange() {
-
+    onFavoritedChange(aReview) {
+      // since favorited property is in the data store - use a mutation to change
+      this.$store.commit("FLIP_FAVORITED", aReview);
     }
   }
 };

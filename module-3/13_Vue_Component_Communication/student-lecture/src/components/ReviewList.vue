@@ -18,8 +18,8 @@ export default {
   },
   computed: {
     filteredReviews() {
-      const reviewsFilter = -1;
-      const reviews = [];
+      const reviewsFilter = this.$store.state.filter;       // this filter is in the data store, so we have to get it
+      const reviews = this.$store.state.reviews;        // added
       return reviews.filter(review => {
         return reviewsFilter === 0 ? true : reviewsFilter === review.rating;
       });

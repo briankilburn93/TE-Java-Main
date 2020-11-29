@@ -1,14 +1,15 @@
 <template>
   <div id="app" class="main">
-    <h1>Product Reviews for </h1>
-    <p class="description"></p>
+    <h1>Product Reviews for {{ $store.state.name }}</h1>        <!-- get the name value from the data store -->
+    <p class="description">{{ $store.state.description }}</p>
     <div class="well-display">
+      <!-- include each component on the page using it as kabob-case html tag -->
       <average-summary />
-      <star-summary />
-      <star-summary />
-      <star-summary />
-      <star-summary />
-      <star-summary />
+      <star-summary rating="1"/>   <!-- pass a value for rating to StartSummary component -->
+      <star-summary rating="2"/>
+      <star-summary rating="3"/>
+      <star-summary rating="4"/>
+      <star-summary rating="5"/>
     </div>
     <add-review />
     <review-list />
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+// We need to import the code for each component we are using
 import AverageSummary from "./components/AverageSummary.vue";
 import StarSummary from "./components/StarSummary.vue";
 import AddReview from "./components/AddReview.vue";
@@ -23,7 +25,7 @@ import ReviewList from "./components/ReviewList.vue";
 
 export default {
   name: "app",
-  components: {
+  components: {     // List of the Vue components used
     AverageSummary,
     StarSummary,
     AddReview,
