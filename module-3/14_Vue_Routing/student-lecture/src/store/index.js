@@ -3,13 +3,13 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-    activeProduct: 0,
-    filter: 0,
-    products: [
+export default new Vuex.Store({     // Vuex centralized data store for the app
+  state: {                      // The object that holds the data
+    activeProduct: 0,           // Product id of the product currently active in the app
+    filter: 0,                  // Used to filter reviews currently displayed
+    products: [                 // Array of objects with the Products info available for display
       {
-        id: 1,
+        id: 1,                                                                                                // product id
         name: "Cigar Parties for Dummies",
         description: "Host and plan the perfect cigar party for all of your squirrelly friends.",
         reviews: [

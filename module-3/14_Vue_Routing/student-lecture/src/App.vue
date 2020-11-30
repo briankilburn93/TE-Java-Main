@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>   <!-- main page display for the app -->
+    <router-view />   <!-- This tells Vue to use the router to determine which page to display -->
+  </div>
 </template>
 
 <script>
