@@ -12,7 +12,9 @@ const routes = [
     name: 'products',     // name for the path/router-view association
     component: Products   // view router component associated with the path (see path above)
   },
-  {
+  {       // we are using a dynamic path(or dynamic segment) to display product detail
+    // a dynamic path is one with a colon and a variable name after it (ex. products/:id)
+    // the variable is a path provided when the path is specified
     path: '/products/:id',    // This path will have a path variable called id
     name: 'product-detail',   // name for the path-router view association
     component: ProductDetail  // Name of the router view in the views folder
