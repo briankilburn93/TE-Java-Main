@@ -2,7 +2,7 @@
   <div>
     <h1>{{ title }}</h1>
     <div class="loading" v-if="isLoading">
-      <img src="../assets/ping_pong_loader.gif" />
+      <img src="../assets/squirrel.gif" />
     </div>
     <div class="boards" v-else>
       <board-column

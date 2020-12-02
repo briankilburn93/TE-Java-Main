@@ -3,7 +3,7 @@
     <h1>My Kanban Boards</h1>
     <div class="boards">
       <div class="loading" v-if="isLoading">
-        <img src="../assets/ping_pong_loader.gif" />
+        <img src="../assets/squirrel.gif" />
       </div>
       <div
         class="board"
