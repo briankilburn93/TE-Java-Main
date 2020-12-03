@@ -5,7 +5,7 @@
     <new-releases-list />
 
     <div id="nav">
-        <router-link to="/newBook">Add Book to Reading List</router-link>
+        <router-link to="/addBook">Add Book to Reading List</router-link>
     </div>
 </div>
 
