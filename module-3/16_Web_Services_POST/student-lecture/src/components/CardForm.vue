@@ -30,7 +30,7 @@
 
 <script>
 import boardsService from "../services/BoardService";
-import moment from "moment";
+import moment from "moment";      // Access the moment formatting dates/times
 
 export default {
   name: "card-form",
@@ -89,21 +89,27 @@ export default {
               this.$router.push(`/board/${newCard.boardId}`);
             }
           })
-          .catch(error => {
-            this.handleErrorResponse(error, "updating");
+          // catch errors from API call - an object containing info about the error is passed to the .catch
+          // similar to Exception Handling in Java
+          .catch(error => {     // if there was an error in the API call
+            this.handleErrorResponse(error, "updating");    // call this method in our code with the error object and a string
           });
       }
     },
     cancelForm() {
       this.$router.push(`/board/${this.$route.params.boardID}`);
     },
+    //
+    //
+    //
+    //
     handleErrorResponse(error, verb) {
-      if (error.response) {
-        this.errorMsg =
-          "Error " + verb + " card. Response received was '" +
+      if (error.response) {                     // if it was response error...
+        this.errorMsg =                         //      Set errorMsg attribute to some verbiage
+          "Error " + verb + " card. Response received was '" +    // and the text to server sent for the response error
           error.response.statusText +
           "'.";
-      } else if (error.request) {
+      } else if (error.request) {               // if it was request error...
         this.errorMsg =
           "Error " + verb + " card. Server could not be reached.";
       } else {

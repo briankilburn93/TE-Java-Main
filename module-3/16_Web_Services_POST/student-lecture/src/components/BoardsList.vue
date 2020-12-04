@@ -2,10 +2,14 @@
   <div id="sideNav">
     <h1>My Kanban Boards</h1>
     <div class="boards">
+      <!-- show this div when errorMsg is not empty (if there is an error message) -->
+      <!-- Alternate code: v-show=!error -->
       <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
       <div class="loading" v-if="isLoading">
         <img src="../assets/ping_pong_loader.gif" />
       </div>
+      <!-- Define a link to the router path named 'Board' passing it the board id of the board -->
+      <!-- for each board of the boards array in the Vuex data store -->
       <router-link :to="{ name: 'Board', params: { id: board.id } }"
         class="board"
         v-for="board in this.$store.state.boards"
@@ -49,12 +53,19 @@ export default {
   },
   methods: {
     retrieveBoards() {
+      // call the getBoards() in boardServices, wait for it to complete (.then)
+      // when the call completes it calls the SET_BOARDS mutation in the data store to store the
+      //    the response data is what the call to getBoards() returned
+      //    AND indicate loading is complete (isLoading=false)
       boardsService.getBoards().then(response => {
         this.$store.commit("SET_BOARDS", response.data);
         this.isLoading = false;
 
-        if (this.$route.name == "Home" && response.status === 200 && response.data.length > 0) {
-          this.$router.push(`/board/${response.data[0].id}`);
+        // Check to be sure there was no error in the call to getBoards()
+        // if the path we are in is "Home" AND the http status code was 200 (OK) AND there was response data
+        //    push the path /board/id-of-first-element-in-response to the browser - tell router/browser to go to this path/page
+        if (this.$route.name == "Home" && response.status === 200 && response.data.length > 0) {    // if call was good
+          this.$router.push(`/board/${response.data[0].id}`);     // go to the /board with the 1st element in the array
         }
       });
     },
