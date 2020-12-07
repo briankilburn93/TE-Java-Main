@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import TopicService from '../services/TopicService';
 import topicService from "../services/TopicService";
 
 export default {
@@ -24,9 +25,18 @@ export default {
     };
   },
   methods: {
-    saveTopic() {}
+    saveTopic() {
+      topicService.postObj(this.topic).then(response => {
+            if (response.status === 201) {
+              this.$router.push(`/`);
+    }
+  })
+  .catch(error => {
+            this.handleErrorResponse(error, "adding");
+          });
+}
   }
-};
+}
 </script>
 
 <style>

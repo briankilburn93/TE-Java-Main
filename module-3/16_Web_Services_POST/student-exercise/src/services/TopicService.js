@@ -12,6 +12,10 @@ export default {
 
   get(id) {
     return http.get(`/topics/${id}`);
+  },
+
+  postObj(topic) {
+    return http.post('/topics', topic);
   }
 
 }
